@@ -1,0 +1,14 @@
+{
+  "name": "portifyai",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently \"npm run dev --prefix frontend\" \"npm run dev:backend\"",
+    "dev:backend": "cd backend && uvicorn app.main:app --reload --port 8000",
+    "build": "npm run build --prefix frontend",
+    "lint": "npm run lint --prefix frontend && cd backend && ruff check . && black --check . && isort --check ."
+  },
+  "devDependencies": {
+    "concurrently": "^9.0.0"
+  }
+}
