@@ -152,14 +152,10 @@ def validate_production_config() -> None:
         else:
             warnings.append(msg)
 
-    # 2. ANTHROPIC_API_KEY — without it every AI feature raises an exception at
-    #    runtime, which is a poor user experience and hard to diagnose.
-    if not settings.ANTHROPIC_API_KEY:
-        msg = "ANTHROPIC_API_KEY is not set — AI features will fail at runtime"
-        if settings.is_production:
-            errors.append(msg)
-        else:
-            warnings.append(msg)
+    # 2. OPENROUTER_API_KEY — required for AI features (replaced Anthropic).
+    if not settings.OPENROUTER_API_KEY and not settings.ANTHROPIC_API_KEY:
+        msg = "Neither OPENROUTER_API_KEY nor ANTHROPIC_API_KEY is set — AI features will fail"
+        warnings.append(msg)
 
     # 3. DATABASE_URL — the default value points to localhost which won't work
     #    in any containerised or cloud environment.
