@@ -48,10 +48,10 @@ const INITIAL: FormState = {
 
 const CLS = {
   input:
-    "w-full rounded-xl border border-[rgba(108,99,255,0.2)] bg-[#13131e] px-4 py-3 text-[#e8e8f0] placeholder-[#7777aa] outline-none transition-colors focus:border-[#6c63ff] text-base",
+    "w-full rounded-xl border border-[var(--pf-border-light)] bg-[var(--pf-surface)] px-4 py-3 text-[var(--pf-text)] placeholder-[var(--pf-muted)] outline-none transition-colors focus:border-[var(--pf-accent)] text-base",
   textarea:
-    "w-full rounded-xl border border-[rgba(108,99,255,0.2)] bg-[#13131e] px-4 py-3 text-[#e8e8f0] placeholder-[#7777aa] outline-none transition-colors focus:border-[#6c63ff] text-base resize-none",
-  label: "block text-sm font-medium text-[#7777aa] mb-1.5",
+    "w-full rounded-xl border border-[var(--pf-border-light)] bg-[var(--pf-surface)] px-4 py-3 text-[var(--pf-text)] placeholder-[var(--pf-muted)] outline-none transition-colors focus:border-[var(--pf-accent)] text-base resize-none",
+  label: "block text-sm font-medium text-[var(--pf-muted)] mb-1.5",
 };
 
 // ── step index helpers ─────────────────────────────────────────────────────────
@@ -247,8 +247,8 @@ export default function BuildResumePage() {
                   }
                   className={`rounded-xl border py-2.5 text-sm font-medium transition-all ${
                     form.experience_summary.years === opt
-                      ? "border-[#6c63ff] bg-[rgba(108,99,255,0.15)] text-[#8b84ff]"
-                      : "border-[rgba(108,99,255,0.15)] bg-[#13131e] text-[#7777aa] hover:border-[rgba(108,99,255,0.4)] hover:text-[#e8e8f0]"
+                      ? "border-[var(--pf-accent)] bg-[var(--pf-accent-soft)] text-[var(--pf-accent-text)]"
+                      : "border-[var(--pf-accent-soft)] bg-[var(--pf-surface)] text-[var(--pf-muted)] hover:border-[var(--pf-border-hover)] hover:text-[var(--pf-text)]"
                   }`}
                 >
                   {opt}
@@ -266,7 +266,7 @@ export default function BuildResumePage() {
             }
             placeholder="e.g. React, TypeScript, Node.js — press Enter after each"
           />
-          <p className="mt-1.5 text-xs text-[#7777aa]">Press Enter or comma to add each technology</p>
+          <p className="mt-1.5 text-xs text-[var(--pf-muted)]">Press Enter or comma to add each technology</p>
         </div>
       </div>
     </StepShell>
@@ -387,7 +387,7 @@ export default function BuildResumePage() {
           type="button"
           onClick={handleSuggestSkills}
           disabled={suggestingSkills}
-          className="flex items-center gap-2 rounded-xl border border-[rgba(108,99,255,0.25)] bg-[rgba(108,99,255,0.06)] px-4 py-2.5 text-sm font-medium text-[#8b84ff] transition-all hover:border-[rgba(108,99,255,0.5)] hover:bg-[rgba(108,99,255,0.12)] disabled:opacity-60"
+          className="flex items-center gap-2 rounded-xl border border-[var(--pf-border-medium)] bg-[var(--pf-border-faint)] px-4 py-2.5 text-sm font-medium text-[var(--pf-accent-text)] transition-all hover:border-[rgba(108,99,255,0.5)] hover:bg-[var(--pf-accent-subtle)] disabled:opacity-60"
         >
           {suggestingSkills ? (
             <>
@@ -402,7 +402,7 @@ export default function BuildResumePage() {
           )}
         </button>
         {form.skills.length > 0 && (
-          <p className="text-xs text-[#7777aa]">{form.skills.length} skills added</p>
+          <p className="text-xs text-[var(--pf-muted)]">{form.skills.length} skills added</p>
         )}
       </div>
     </StepShell>
@@ -495,7 +495,7 @@ export default function BuildResumePage() {
                     : suggestion,
                 );
               }}
-              className="rounded-full border border-[rgba(108,99,255,0.2)] px-3 py-1 text-xs text-[#7777aa] hover:border-[rgba(108,99,255,0.5)] hover:text-[#e8e8f0] transition-colors"
+              className="rounded-full border border-[var(--pf-border-light)] px-3 py-1 text-xs text-[var(--pf-muted)] hover:border-[rgba(108,99,255,0.5)] hover:text-[var(--pf-text)] transition-colors"
             >
               + {suggestion}
             </button>
@@ -569,22 +569,22 @@ function WorkExpStep({
         <div className="grid grid-cols-2 gap-3">
           <div>
             <label
-              className="block text-sm font-medium text-[#7777aa] mb-1.5"
+              className="block text-sm font-medium text-[var(--pf-muted)] mb-1.5"
             >
               Company
             </label>
             <input
               autoFocus
-              className="w-full rounded-xl border border-[rgba(108,99,255,0.2)] bg-[#13131e] px-4 py-3 text-[#e8e8f0] placeholder-[#7777aa] outline-none transition-colors focus:border-[#6c63ff] text-base"
+              className="w-full rounded-xl border border-[var(--pf-border-light)] bg-[var(--pf-surface)] px-4 py-3 text-[var(--pf-text)] placeholder-[var(--pf-muted)] outline-none transition-colors focus:border-[var(--pf-accent)] text-base"
               placeholder="e.g. Stripe"
               value={data.company}
               onChange={(e) => onChange(index, "company", e.target.value)}
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-[#7777aa] mb-1.5">Your role</label>
+            <label className="block text-sm font-medium text-[var(--pf-muted)] mb-1.5">Your role</label>
             <input
-              className="w-full rounded-xl border border-[rgba(108,99,255,0.2)] bg-[#13131e] px-4 py-3 text-[#e8e8f0] placeholder-[#7777aa] outline-none transition-colors focus:border-[#6c63ff] text-base"
+              className="w-full rounded-xl border border-[var(--pf-border-light)] bg-[var(--pf-surface)] px-4 py-3 text-[var(--pf-text)] placeholder-[var(--pf-muted)] outline-none transition-colors focus:border-[var(--pf-accent)] text-base"
               placeholder="e.g. Senior Engineer"
               value={data.role}
               onChange={(e) => onChange(index, "role", e.target.value)}
@@ -592,17 +592,17 @@ function WorkExpStep({
           </div>
         </div>
         <div>
-          <label className="block text-sm font-medium text-[#7777aa] mb-1.5">
+          <label className="block text-sm font-medium text-[var(--pf-muted)] mb-1.5">
             Key achievements & responsibilities
           </label>
           <textarea
             rows={5}
-            className="w-full rounded-xl border border-[rgba(108,99,255,0.2)] bg-[#13131e] px-4 py-3 text-[#e8e8f0] placeholder-[#7777aa] outline-none transition-colors focus:border-[#6c63ff] text-base resize-none"
+            className="w-full rounded-xl border border-[var(--pf-border-light)] bg-[var(--pf-surface)] px-4 py-3 text-[var(--pf-text)] placeholder-[var(--pf-muted)] outline-none transition-colors focus:border-[var(--pf-accent)] text-base resize-none"
             placeholder={`e.g.\n• Led migration from monolith to microservices, reducing deploy time by 60%\n• Mentored 3 junior engineers\n• Built real-time dashboard handling 50k events/sec`}
             value={data.achievements}
             onChange={(e) => onChange(index, "achievements", e.target.value)}
           />
-          <p className="mt-1.5 text-xs text-[#7777aa]">
+          <p className="mt-1.5 text-xs text-[var(--pf-muted)]">
             Claude will expand and polish these into strong bullet points.
           </p>
         </div>
@@ -611,7 +611,7 @@ function WorkExpStep({
             <button type="button" onClick={onRemoveWork} className="text-sm text-red-500 hover:text-red-400">Remove Role</button>
           ) : <div/>}
           {onAddWork ? (
-            <button type="button" onClick={onAddWork} className="text-sm text-[#8b84ff] hover:text-[#a09cff]">+ Add Another Role</button>
+            <button type="button" onClick={onAddWork} className="text-sm text-[var(--pf-accent-text)] hover:text-[#a09cff]">+ Add Another Role</button>
           ) : null}
         </div>
       </div>
@@ -670,21 +670,21 @@ function ProjectStep({
       <div className="space-y-4">
         <div className="grid grid-cols-2 gap-3">
           <div>
-            <label className="block text-sm font-medium text-[#7777aa] mb-1.5">Project name</label>
+            <label className="block text-sm font-medium text-[var(--pf-muted)] mb-1.5">Project name</label>
             <input
               autoFocus
-              className="w-full rounded-xl border border-[rgba(108,99,255,0.2)] bg-[#13131e] px-4 py-3 text-[#e8e8f0] placeholder-[#7777aa] outline-none transition-colors focus:border-[#6c63ff] text-base"
+              className="w-full rounded-xl border border-[var(--pf-border-light)] bg-[var(--pf-surface)] px-4 py-3 text-[var(--pf-text)] placeholder-[var(--pf-muted)] outline-none transition-colors focus:border-[var(--pf-accent)] text-base"
               placeholder="e.g. PortifyAI"
               value={data.name}
               onChange={(e) => onChangeField(index, "name", e.target.value)}
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-[#7777aa] mb-1.5">
+            <label className="block text-sm font-medium text-[var(--pf-muted)] mb-1.5">
               Live link or GitHub
             </label>
             <input
-              className="w-full rounded-xl border border-[rgba(108,99,255,0.2)] bg-[#13131e] px-4 py-3 text-[#e8e8f0] placeholder-[#7777aa] outline-none transition-colors focus:border-[#6c63ff] text-base"
+              className="w-full rounded-xl border border-[var(--pf-border-light)] bg-[var(--pf-surface)] px-4 py-3 text-[var(--pf-text)] placeholder-[var(--pf-muted)] outline-none transition-colors focus:border-[var(--pf-accent)] text-base"
               placeholder="https://github.com/…"
               value={data.link}
               onChange={(e) => onChangeField(index, "link", e.target.value)}
@@ -692,17 +692,17 @@ function ProjectStep({
           </div>
         </div>
         <div>
-          <label className="block text-sm font-medium text-[#7777aa] mb-1.5">Description</label>
+          <label className="block text-sm font-medium text-[var(--pf-muted)] mb-1.5">Description</label>
           <textarea
             rows={3}
-            className="w-full rounded-xl border border-[rgba(108,99,255,0.2)] bg-[#13131e] px-4 py-3 text-[#e8e8f0] placeholder-[#7777aa] outline-none transition-colors focus:border-[#6c63ff] text-base resize-none"
+            className="w-full rounded-xl border border-[var(--pf-border-light)] bg-[var(--pf-surface)] px-4 py-3 text-[var(--pf-text)] placeholder-[var(--pf-muted)] outline-none transition-colors focus:border-[var(--pf-accent)] text-base resize-none"
             placeholder="What does it do? What problem does it solve? What's the impact?"
             value={data.description}
             onChange={(e) => onChangeField(index, "description", e.target.value)}
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-[#7777aa] mb-1.5">
+          <label className="block text-sm font-medium text-[var(--pf-muted)] mb-1.5">
             Technologies used
           </label>
           <TagInput

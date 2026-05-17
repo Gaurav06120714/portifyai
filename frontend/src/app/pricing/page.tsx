@@ -76,11 +76,11 @@ export default function PricingPage() {
   };
 
   // Colors based on theme
-  const bg = isLight ? "#ffffff" : "#0d0d14";
-  const cardBg = isLight ? "#f8f8fa" : "#13131e";
-  const border = isLight ? "rgba(0,0,0,0.08)" : "rgba(108,99,255,0.15)";
-  const heading = isLight ? "#1a1a2e" : "#e8e8f0";
-  const sub = isLight ? "#666688" : "#7777aa";
+  const bg = isLight ? "#ffffff" : "var(--pf-bg)";
+  const cardBg = isLight ? "#f8f8fa" : "var(--pf-surface)";
+  const border = isLight ? "rgba(0,0,0,0.08)" : "var(--pf-accent-soft)";
+  const heading = isLight ? "#1a1a2e" : "var(--pf-text)";
+  const sub = isLight ? "#666688" : "var(--pf-muted)";
   const text = isLight ? "#333" : "#c8c8e8";
 
   return (
@@ -95,11 +95,11 @@ export default function PricingPage() {
       >
         <div className="mx-auto flex h-16 max-w-5xl items-center justify-between px-4">
           <Link href="/" className="flex items-center gap-2">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#6c63ff]">
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[var(--pf-accent)]">
               <Zap className="h-4 w-4 text-white" />
             </div>
             <span className="font-bold" style={{ color: heading }}>
-              Portify<span className="text-[#6c63ff]">AI</span>
+              Portify<span className="text-[var(--pf-accent)]">AI</span>
             </span>
           </Link>
           <div className="flex items-center gap-3">
@@ -117,7 +117,7 @@ export default function PricingPage() {
                 </Link>
                 <Link
                   href="/register"
-                  className="rounded-lg bg-[#6c63ff] px-4 py-2 text-sm font-semibold text-white hover:bg-[#5a53e0] transition-colors"
+                  className="rounded-lg bg-[var(--pf-accent)] px-4 py-2 text-sm font-semibold text-white hover:bg-[var(--pf-accent-hover)] transition-colors"
                 >
                   Get started
                 </Link>
@@ -137,7 +137,7 @@ export default function PricingPage() {
         >
           <h1 className="text-4xl font-extrabold sm:text-5xl" style={{ color: heading }}>
             Simple,{" "}
-            <span className="bg-gradient-to-r from-[#6c63ff] to-[#00d4ff] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[var(--pf-accent)] to-[#00d4ff] bg-clip-text text-transparent">
               honest pricing
             </span>
           </h1>
@@ -204,22 +204,22 @@ export default function PricingPage() {
             className="relative overflow-hidden rounded-2xl border p-7 shadow-lg transition-colors duration-300"
             style={{
               background: cardBg,
-              borderColor: "#6c63ff",
-              boxShadow: "0 0 40px rgba(108,99,255,0.12)",
+              borderColor: "var(--pf-accent)",
+              boxShadow: "0 0 40px var(--pf-accent-subtle)",
             }}
           >
             {/* Popular badge */}
             <div className="absolute -top-3.5 left-1/2 -translate-x-1/2">
-              <span className="rounded-full bg-[#6c63ff] px-4 py-1 text-xs font-bold text-white shadow-md">
+              <span className="rounded-full bg-[var(--pf-accent)] px-4 py-1 text-xs font-bold text-white shadow-md">
                 MOST POPULAR
               </span>
             </div>
 
             {/* Top glow bar */}
-            <div className="absolute left-0 right-0 top-0 h-[2px] bg-gradient-to-r from-[#6c63ff] to-[#00d4ff]" />
+            <div className="absolute left-0 right-0 top-0 h-[2px] bg-gradient-to-r from-[var(--pf-accent)] to-[#00d4ff]" />
 
             <div className="mb-6 pt-2">
-              <p className="text-sm font-semibold uppercase tracking-wider text-[#6c63ff]">Pro</p>
+              <p className="text-sm font-semibold uppercase tracking-wider text-[var(--pf-accent)]">Pro</p>
               <div className="mt-2 flex items-end gap-1">
                 <span className="text-4xl font-extrabold" style={{ color: heading }}>$9</span>
                 <span className="mb-1" style={{ color: sub }}>/month</span>
@@ -232,8 +232,8 @@ export default function PricingPage() {
             <ul className="space-y-3 mb-7">
               {PRO_FEATURES.map((f) => (
                 <li key={f} className="flex items-center gap-2.5 text-sm" style={{ color: text }}>
-                  <div className="flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-[rgba(108,99,255,0.15)]">
-                    <Check className="h-3 w-3 text-[#6c63ff]" />
+                  <div className="flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-[var(--pf-accent-soft)]">
+                    <Check className="h-3 w-3 text-[var(--pf-accent)]" />
                   </div>
                   {f}
                 </li>
@@ -251,7 +251,7 @@ export default function PricingPage() {
               <button
                 onClick={handleUpgrade}
                 disabled={loading}
-                className="flex w-full items-center justify-center gap-2 rounded-xl bg-[#6c63ff] py-3 text-sm font-semibold text-white shadow-[0_0_24px_rgba(108,99,255,0.3)] hover:bg-[#5a53e0] hover:shadow-[0_0_32px_rgba(108,99,255,0.5)] transition-all disabled:opacity-60"
+                className="flex w-full items-center justify-center gap-2 rounded-xl bg-[var(--pf-accent)] py-3 text-sm font-semibold text-white shadow-[0_0_24px_var(--pf-border-hover)] hover:bg-[var(--pf-accent-hover)] hover:shadow-[0_0_32px_rgba(108,99,255,0.5)] transition-all disabled:opacity-60"
               >
                 {loading ? (
                   <><Loader2 className="h-4 w-4 animate-spin" /> Redirecting&hellip;</>

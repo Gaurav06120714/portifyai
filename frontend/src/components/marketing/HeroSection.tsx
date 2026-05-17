@@ -31,7 +31,7 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="mb-6 inline-flex items-center gap-2 rounded-full border border-[rgba(108,99,255,0.35)] bg-[rgba(108,99,255,0.1)] px-4 py-1.5 text-sm font-medium text-[#a09bff]"
+          className="mb-6 inline-flex items-center gap-2 rounded-full border border-[rgba(108,99,255,0.35)] bg-[var(--pf-border-dim)] px-4 py-1.5 text-sm font-medium text-[#a09bff]"
         >
           <Sparkles className="h-3.5 w-3.5" />
           Powered by Claude AI · Built for 2025

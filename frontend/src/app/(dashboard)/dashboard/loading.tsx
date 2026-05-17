@@ -19,7 +19,7 @@ export default function DashboardLoading() {
         <div className="h-5 w-32 animate-pulse rounded bg-[#1a1a2e]" />
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           {[1, 2].map((i) => (
-            <div key={i} className="h-24 animate-pulse rounded-2xl bg-[#13131e]" />
+            <div key={i} className="h-24 animate-pulse rounded-2xl bg-[var(--pf-surface)]" />
           ))}
         </div>
       </div>
@@ -28,7 +28,7 @@ export default function DashboardLoading() {
       <div className="space-y-3">
         <div className="h-5 w-40 animate-pulse rounded bg-[#1a1a2e]" />
         {[1, 2].map((i) => (
-          <div key={i} className="h-16 animate-pulse rounded-xl bg-[#13131e]" />
+          <div key={i} className="h-16 animate-pulse rounded-xl bg-[var(--pf-surface)]" />
         ))}
       </div>
     </div>

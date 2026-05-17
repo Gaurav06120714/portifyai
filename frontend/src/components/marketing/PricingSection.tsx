@@ -34,7 +34,7 @@ const PLANS = [
     desc: "For serious job seekers",
     cta: "Get Pro",
     href: "/register?plan=pro",
-    accent: "#6c63ff",
+    accent: "var(--pf-accent)",
     featured: true,
     perks: [
       "Unlimited portfolios",

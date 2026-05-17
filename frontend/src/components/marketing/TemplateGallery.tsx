@@ -11,12 +11,12 @@ const TEMPLATES = [
     id: "aurora",
     name: "Aurora",
     tag: "Most popular",
-    tagColor: "#6c63ff",
+    tagColor: "var(--pf-accent)",
     desc: "Dark electric with animated gradients. Commands attention from recruiters on the first scroll.",
     bg: "#0F0F1A",
-    accent: "#6c63ff",
+    accent: "var(--pf-accent)",
     secondary: "#00d4ff",
-    hero: "from-[#6c63ff]/20 to-[#00d4ff]/10",
+    hero: "from-[var(--pf-accent)]/20 to-[#00d4ff]/10",
     skills: ["React", "TypeScript", "Node.js"],
   },
   {
@@ -57,7 +57,7 @@ function TemplateCard({ tpl, index }: { tpl: (typeof TEMPLATES)[0]; index: numbe
       transition={{ duration: 0.55, delay: index * 0.12, ease: [0.21, 0.47, 0.32, 0.98] }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      className="group relative overflow-hidden rounded-2xl border border-[rgba(108,99,255,0.15)] bg-[#13131e] transition-all duration-300 hover:border-[rgba(108,99,255,0.4)] hover:shadow-[0_20px_60px_rgba(0,0,0,0.5)]"
+      className="group relative overflow-hidden rounded-2xl border border-[var(--pf-accent-soft)] bg-[var(--pf-surface)] transition-all duration-300 hover:border-[var(--pf-border-hover)] hover:shadow-[0_20px_60px_rgba(0,0,0,0.5)]"
     >
       {/* Preview area */}
       <div
@@ -169,7 +169,7 @@ function TemplateCard({ tpl, index }: { tpl: (typeof TEMPLATES)[0]; index: numbe
             {tpl.tag}
           </span>
         </div>
-        <p className="mt-2 text-sm leading-relaxed text-[#7777aa]">{tpl.desc}</p>
+        <p className="mt-2 text-sm leading-relaxed text-[var(--pf-muted)]">{tpl.desc}</p>
       </div>
     </motion.div>
   );
@@ -181,13 +181,13 @@ export default function TemplateGallery() {
       <div className="pointer-events-none absolute right-0 top-1/2 h-96 w-96 -translate-y-1/2 rounded-full bg-[#00d4ff] opacity-5 blur-3xl" />
       <div className="mx-auto max-w-6xl">
         <FadeUp className="mb-16 text-center">
-          <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-[rgba(108,99,255,0.3)] bg-[rgba(108,99,255,0.08)] px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-[#6c63ff]">
+          <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-[var(--pf-border-hover)] bg-[var(--pf-border-subtle)] px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-[var(--pf-accent)]">
             Templates
           </div>
           <h2 className="text-4xl font-extrabold tracking-tight text-white sm:text-5xl">
             Three premium themes
           </h2>
-          <p className="mx-auto mt-4 max-w-xl text-[#7777aa]">
+          <p className="mx-auto mt-4 max-w-xl text-[var(--pf-muted)]">
             Every template is fully responsive, SEO-optimised, and crafted down to the
             last pixel. Pick one — or switch anytime.
           </p>
@@ -202,7 +202,7 @@ export default function TemplateGallery() {
         <FadeUp delay={0.3} className="mt-10 text-center">
           <Link
             href="/register"
-            className="inline-flex items-center gap-2 rounded-xl border border-[rgba(108,99,255,0.25)] px-6 py-3 text-sm font-semibold text-[#c8c8e8] transition-all hover:border-[rgba(108,99,255,0.55)] hover:bg-[rgba(108,99,255,0.08)]"
+            className="inline-flex items-center gap-2 rounded-xl border border-[var(--pf-border-medium)] px-6 py-3 text-sm font-semibold text-[#c8c8e8] transition-all hover:border-[rgba(108,99,255,0.55)] hover:bg-[var(--pf-border-subtle)]"
           >
             Browse all templates <ArrowRight className="h-4 w-4" />
           </Link>

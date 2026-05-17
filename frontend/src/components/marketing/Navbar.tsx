@@ -40,7 +40,7 @@ export default function Navbar() {
         style={{
           opacity: bgOpacity,
           background: isLight ? "rgba(245,245,247,0.92)" : "rgba(15,15,26,0.92)",
-          borderColor: isLight ? "rgba(0,0,0,0.06)" : "rgba(108,99,255,0.1)",
+          borderColor: isLight ? "rgba(0,0,0,0.06)" : "var(--pf-border-dim)",
         }}
       />
 
@@ -49,7 +49,7 @@ export default function Navbar() {
         <Link href="/" className="flex items-center gap-2.5 group">
           <motion.div
             whileHover={{ scale: 1.08 }}
-            className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#6c63ff] shadow-[0_0_20px_rgba(108,99,255,0.5)]"
+            className="flex h-8 w-8 items-center justify-center rounded-lg bg-[var(--pf-accent)] shadow-[0_0_20px_rgba(108,99,255,0.5)]"
           >
             <Zap className="h-4 w-4 text-white" />
           </motion.div>
@@ -57,7 +57,7 @@ export default function Navbar() {
             className="text-lg font-bold tracking-tight transition-colors duration-300"
             style={{ color: isLight ? "#1a1a2e" : "#ffffff" }}
           >
-            Portify<span className="text-[#6c63ff]">AI</span>
+            Portify<span className="text-[var(--pf-accent)]">AI</span>
           </span>
         </Link>
 
@@ -72,8 +72,8 @@ export default function Navbar() {
               onMouseEnter={(e) => {
                 e.currentTarget.style.color = isLight ? "#1a1a2e" : "#ffffff";
                 e.currentTarget.style.background = isLight
-                  ? "rgba(108,99,255,0.06)"
-                  : "rgba(108,99,255,0.08)";
+                  ? "var(--pf-border-faint)"
+                  : "var(--pf-border-subtle)";
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.color = isLight ? "#666688" : "#9999bb";
@@ -94,11 +94,11 @@ export default function Navbar() {
             <div className="flex items-center gap-2">
               <div
                 className="h-8 w-8 animate-pulse rounded-full"
-                style={{ background: isLight ? "#e5e5ea" : "rgba(108,99,255,0.15)" }}
+                style={{ background: isLight ? "#e5e5ea" : "var(--pf-accent-soft)" }}
               />
               <div
                 className="h-4 w-16 animate-pulse rounded"
-                style={{ background: isLight ? "#e5e5ea" : "rgba(108,99,255,0.15)" }}
+                style={{ background: isLight ? "#e5e5ea" : "var(--pf-accent-soft)" }}
               />
             </div>
           ) : isSignedIn ? (
@@ -120,7 +120,7 @@ export default function Navbar() {
               </Link>
               <Link
                 href="/register"
-                className="rounded-xl bg-[#6c63ff] px-4 py-2 text-sm font-semibold text-white shadow-[0_0_20px_rgba(108,99,255,0.35)] transition-all hover:bg-[#5a53e0] hover:shadow-[0_0_28px_rgba(108,99,255,0.55)]"
+                className="rounded-xl bg-[var(--pf-accent)] px-4 py-2 text-sm font-semibold text-white shadow-[0_0_20px_rgba(108,99,255,0.35)] transition-all hover:bg-[var(--pf-accent-hover)] hover:shadow-[0_0_28px_rgba(108,99,255,0.55)]"
               >
                 Get started free
               </Link>
@@ -153,7 +153,7 @@ export default function Navbar() {
             className="relative overflow-hidden border-b md:hidden"
             style={{
               background: isLight ? "#f5f5f7" : "#0F0F1A",
-              borderColor: isLight ? "rgba(0,0,0,0.06)" : "rgba(108,99,255,0.12)",
+              borderColor: isLight ? "rgba(0,0,0,0.06)" : "var(--pf-accent-subtle)",
             }}
           >
             <div className="px-6 pb-6 pt-2">
@@ -179,7 +179,7 @@ export default function Navbar() {
                   </Link>
                   <Link
                     href="/register"
-                    className="rounded-xl bg-[#6c63ff] py-2.5 text-center text-sm font-semibold text-white"
+                    className="rounded-xl bg-[var(--pf-accent)] py-2.5 text-center text-sm font-semibold text-white"
                   >
                     Get started free
                   </Link>

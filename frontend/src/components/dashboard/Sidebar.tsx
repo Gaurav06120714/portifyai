@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useUser, UserButton } from "@clerk/nextjs";
+import { useUser, useClerk } from "@clerk/nextjs";
 import {
   LayoutDashboard,
   Upload,
@@ -12,8 +12,13 @@ import {
   Zap,
   PenLine,
   CreditCard,
+  FileText,
+  LogOut,
+  ChevronDown,
 } from "lucide-react";
+import { useState } from "react";
 import { usePlan } from "@/context/PlanContext";
+import ThemeToggle from "@/components/ThemeToggle";
 
 const NAV_TOP = [
   { href: "/dashboard", label: "Overview", icon: LayoutDashboard },
@@ -21,6 +26,7 @@ const NAV_TOP = [
   { href: "/dashboard/upload", label: "Upload Resume", icon: Upload },
   { href: "/dashboard/portfolios", label: "My Portfolios", icon: FolderOpen },
   { href: "/dashboard/templates", label: "Templates", icon: Palette },
+  { href: "/dashboard/cover-letter", label: "Cover Letter", icon: FileText },
 ];
 
 const NAV_BOTTOM = [
@@ -28,10 +34,75 @@ const NAV_BOTTOM = [
   { href: "/dashboard/settings", label: "Settings", icon: Settings },
 ];
 
+function UserAvatar({ name, email }: { name: string; email?: string }) {
+  const initials = name
+    .split(" ")
+    .map((w) => w[0])
+    .filter(Boolean)
+    .slice(0, 2)
+    .join("")
+    .toUpperCase() || "U";
+
+  const { signOut } = useClerk();
+  const [open, setOpen] = useState(false);
+
+  return (
+    <div className="relative">
+      <button
+        onClick={() => setOpen((o) => !o)}
+        className="flex w-full items-center gap-3 rounded-lg p-2 transition-colors hover:bg-[var(--pf-border-subtle)]"
+      >
+        {/* Custom avatar — correct initials always */}
+        <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[var(--pf-accent)] to-[#8b5cf6] text-sm font-bold text-white shadow-sm">
+          {initials}
+        </div>
+        <div className="min-w-0 flex-1 text-left">
+          <p className="truncate text-sm font-medium text-[var(--pf-text)]">{name}</p>
+          {email && (
+            <p className="truncate text-xs text-[var(--pf-muted)]">{email}</p>
+          )}
+        </div>
+        <ChevronDown
+          className={`h-3.5 w-3.5 flex-shrink-0 text-[var(--pf-muted)] transition-transform ${open ? "rotate-180" : ""}`}
+        />
+      </button>
+
+      {open && (
+        <>
+          <div className="fixed inset-0 z-40" onClick={() => setOpen(false)} />
+          <div className="absolute bottom-full left-0 right-0 z-50 mb-1 overflow-hidden rounded-xl border border-[var(--pf-border)] bg-[var(--pf-surface)] shadow-xl">
+            <Link
+              href="/dashboard/settings"
+              onClick={() => setOpen(false)}
+              className="flex items-center gap-2.5 px-4 py-2.5 text-sm text-[var(--pf-muted)] hover:bg-[var(--pf-border-subtle)] hover:text-[var(--pf-text)] transition-colors"
+            >
+              <Settings className="h-4 w-4" />
+              Account Settings
+            </Link>
+            <div className="h-px bg-[var(--pf-border-dim)]" />
+            <button
+              onClick={() => signOut({ redirectUrl: "/" })}
+              className="flex w-full items-center gap-2.5 px-4 py-2.5 text-sm text-red-400 hover:bg-red-500/10 transition-colors"
+            >
+              <LogOut className="h-4 w-4" />
+              Sign Out
+            </button>
+          </div>
+        </>
+      )}
+    </div>
+  );
+}
+
 export default function Sidebar() {
   const pathname = usePathname();
   const { user } = useUser();
   const { plan } = usePlan();
+
+  const displayName =
+    [user?.firstName, user?.lastName].filter(Boolean).join(" ") ||
+    user?.username ||
+    "User";
 
   const navLink = (href: string, label: string, Icon: React.ElementType) => {
     const active = href === "/dashboard" ? pathname === href : pathname.startsWith(href);
@@ -41,8 +112,8 @@ export default function Sidebar() {
         href={href}
         className={`flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors ${
           active
-            ? "bg-[rgba(108,99,255,0.15)] text-[#8b84ff]"
-            : "text-[#7777aa] hover:bg-[rgba(108,99,255,0.08)] hover:text-[#e8e8f0]"
+            ? "bg-[var(--pf-accent-soft)] text-[var(--pf-accent-text)]"
+            : "text-[var(--pf-muted)] hover:bg-[var(--pf-border-subtle)] hover:text-[var(--pf-text)]"
         }`}
       >
         <Icon className="h-4 w-4 flex-shrink-0" />
@@ -52,28 +123,31 @@ export default function Sidebar() {
   };
 
   return (
-    <aside className="flex h-full w-64 flex-col border-r border-[rgba(108,99,255,0.15)] bg-[#0d0d14]">
-      {/* Logo */}
-      <div className="flex h-16 items-center gap-2 px-6 border-b border-[rgba(108,99,255,0.15)]">
-        <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#6c63ff]">
+    <aside className="flex h-full w-64 flex-col border-r border-[var(--pf-border-dim)] bg-[var(--pf-bg)]">
+      {/* Logo — clicks go to home */}
+      <Link
+        href="/"
+        className="flex h-16 items-center gap-2.5 border-b border-[var(--pf-border-dim)] px-6 transition-opacity hover:opacity-80"
+      >
+        <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg bg-[var(--pf-accent)]">
           <Zap className="h-4 w-4 text-white" />
         </div>
-        <span className="text-lg font-bold text-[#e8e8f0]">PortifyAI</span>
-      </div>
+        <span className="text-lg font-bold text-[var(--pf-text)]">PortifyAI</span>
+      </Link>
 
       {/* Nav */}
-      <nav className="flex-1 overflow-y-auto px-3 py-4 space-y-1">
+      <nav className="flex-1 overflow-y-auto px-3 py-4 space-y-0.5">
         {NAV_TOP.map(({ href, label, icon: Icon }) => navLink(href, label, Icon))}
 
-        <div className="my-2 h-px bg-[rgba(108,99,255,0.1)]" />
+        <div className="my-3 h-px bg-[var(--pf-border-dim)]" />
 
         {NAV_BOTTOM.map(({ href, label, icon: Icon }) => navLink(href, label, Icon))}
 
-        {/* Pro badge / upgrade nudge */}
+        {/* Pro upgrade nudge */}
         {plan === "free" && (
           <Link
             href="/pricing"
-            className="mt-2 flex items-center gap-2 rounded-lg border border-[rgba(108,99,255,0.25)] bg-[rgba(108,99,255,0.06)] px-3 py-2.5 text-xs font-semibold text-[#8b84ff] transition-colors hover:bg-[rgba(108,99,255,0.12)]"
+            className="mt-2 flex items-center gap-2 rounded-lg border border-[var(--pf-border-medium)] bg-[var(--pf-border-faint)] px-3 py-2.5 text-xs font-semibold text-[var(--pf-accent-text)] transition-colors hover:bg-[var(--pf-accent-subtle)]"
           >
             <Zap className="h-3.5 w-3.5" />
             Upgrade to Pro — $9/mo
@@ -81,19 +155,18 @@ export default function Sidebar() {
         )}
       </nav>
 
-      {/* User */}
-      <div className="border-t border-[rgba(108,99,255,0.15)] p-4">
-        <div className="flex items-center gap-3">
-          <UserButton />
-          <div className="min-w-0 flex-1">
-            <p className="truncate text-sm font-medium text-[#e8e8f0]">
-              {user?.firstName ?? user?.username ?? "User"}
-            </p>
-            <p className="truncate text-xs text-[#7777aa]">
-              {user?.primaryEmailAddress?.emailAddress}
-            </p>
-          </div>
-        </div>
+      {/* Theme toggle */}
+      <div className="border-t border-[var(--pf-border-dim)] px-4 py-3 flex items-center justify-between">
+        <span className="text-xs font-medium text-[var(--pf-muted)]">Theme</span>
+        <ThemeToggle compact />
+      </div>
+
+      {/* User section */}
+      <div className="border-t border-[var(--pf-border-dim)] p-3">
+        <UserAvatar
+          name={displayName}
+          email={user?.primaryEmailAddress?.emailAddress}
+        />
       </div>
     </aside>
   );

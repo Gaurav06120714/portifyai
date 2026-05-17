@@ -1,7 +1,8 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Link from "next/link";
-import { useUser } from "@clerk/nextjs";
+import { useUser, useAuth } from "@clerk/nextjs";
 import { motion } from "framer-motion";
 import {
   Upload,
@@ -12,7 +13,10 @@ import {
   Zap,
   PenLine,
   Sparkles,
+  FileText,
 } from "lucide-react";
+import { getPortfolios } from "@/lib/api";
+import { usePlan } from "@/context/PlanContext";
 
 const QUICK_ACTIONS = [
   {
@@ -20,7 +24,7 @@ const QUICK_ACTIONS = [
     icon: PenLine,
     label: "AI Resume Builder",
     description: "Answer 12 questions — Claude writes your resume",
-    accent: "#6c63ff",
+    accent: "var(--pf-accent)",
     badge: "✨ New",
   },
   {
@@ -32,18 +36,44 @@ const QUICK_ACTIONS = [
     badge: null,
   },
   {
+    href: "/dashboard/cover-letter",
+    icon: FileText,
+    label: "Cover Letter",
+    description: "Generate a tailored cover letter with AI",
+    accent: "#ff6b9d",
+    badge: "✨ New",
+  },
+  {
     href: "/dashboard/templates",
     icon: Palette,
     label: "Browse Templates",
-    description: "Explore Aurora, Minimal, and Cyber themes",
-    accent: "#ff6b9d",
+    description: "Explore Aurora, Minimal, Cyber & Executive",
+    accent: "#f59e0b",
     badge: null,
   },
 ];
 
 export default function DashboardPage() {
   const { user } = useUser();
+  const { getToken } = useAuth();
+  const { plan } = usePlan();
   const name = user?.firstName ?? user?.username ?? "there";
+  const [portfolioCount, setPortfolioCount] = useState<number | null>(null);
+  const [totalViews, setTotalViews] = useState<number | null>(null);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const token = await getToken();
+        if (!token) return;
+        const res = await getPortfolios(token, 1, 100);
+        setPortfolioCount(res.total);
+        setTotalViews(res.items.reduce((sum, p) => sum + (p.views ?? 0), 0));
+      } catch {
+        // non-critical — leave as null
+      }
+    })();
+  }, [getToken]);
 
   return (
     <div className="max-w-5xl mx-auto space-y-8">
@@ -53,8 +83,8 @@ export default function DashboardPage() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.3 }}
       >
-        <h1 className="text-2xl font-bold text-[#e8e8f0]">Hey, {name} 👋</h1>
-        <p className="mt-1 text-[#7777aa]">
+        <h1 className="text-2xl font-bold text-[var(--pf-text)]">Hey, {name} 👋</h1>
+        <p className="mt-1 text-[var(--pf-muted)]">
           Here&apos;s what&apos;s happening with your portfolios.
         </p>
       </motion.div>
@@ -67,28 +97,28 @@ export default function DashboardPage() {
       >
         <Link
           href="/dashboard/build-resume"
-          className="group relative flex items-center justify-between overflow-hidden rounded-2xl border border-[rgba(108,99,255,0.3)] bg-gradient-to-r from-[#13131e] to-[#0f0f1a] p-6 transition-all hover:border-[rgba(108,99,255,0.6)] hover:shadow-[0_0_40px_rgba(108,99,255,0.12)]"
+          className="group relative flex items-center justify-between overflow-hidden rounded-2xl border border-[var(--pf-border-hover)] bg-gradient-to-r from-[var(--pf-surface)] to-[#0f0f1a] p-6 transition-all hover:border-[var(--pf-border-hover)] hover:shadow-[0_0_40px_var(--pf-accent-subtle)]"
         >
           {/* Background glow */}
-          <div className="pointer-events-none absolute right-0 top-0 h-48 w-48 rounded-full bg-[#6c63ff] opacity-5 blur-3xl" />
+          <div className="pointer-events-none absolute right-0 top-0 h-48 w-48 rounded-full bg-[var(--pf-accent)] opacity-5 blur-3xl" />
 
           <div className="flex items-center gap-4">
-            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[rgba(108,99,255,0.15)]">
-              <Sparkles className="h-6 w-6 text-[#6c63ff]" />
+            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[var(--pf-accent-soft)]">
+              <Sparkles className="h-6 w-6 text-[var(--pf-accent)]" />
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <p className="text-lg font-bold text-[#e8e8f0]">AI Resume Builder</p>
-                <span className="rounded-full bg-[rgba(108,99,255,0.2)] px-2 py-0.5 text-xs font-semibold text-[#8b84ff]">
+                <p className="text-lg font-bold text-[var(--pf-text)]">AI Resume Builder</p>
+                <span className="rounded-full bg-[var(--pf-border-light)] px-2 py-0.5 text-xs font-semibold text-[var(--pf-accent-text)]">
                   NEW
                 </span>
               </div>
-              <p className="text-sm text-[#7777aa]">
+              <p className="text-sm text-[var(--pf-muted)]">
                 No resume? No problem. Answer 12 quick questions and Claude builds it for you.
               </p>
             </div>
           </div>
-          <ArrowRight className="h-5 w-5 flex-shrink-0 text-[#7777aa] transition-transform group-hover:translate-x-1 group-hover:text-[#6c63ff]" />
+          <ArrowRight className="h-5 w-5 flex-shrink-0 text-[var(--pf-muted)] transition-transform group-hover:translate-x-1 group-hover:text-[var(--pf-accent)]" />
         </Link>
       </motion.div>
 
@@ -99,9 +129,9 @@ export default function DashboardPage() {
         transition={{ delay: 0.1, duration: 0.3 }}
         className="grid grid-cols-1 gap-4 sm:grid-cols-3"
       >
-        <StatCard icon={<FolderOpen className="h-5 w-5" />} label="Portfolios" value="0" accent="#6c63ff" />
-        <StatCard icon={<Eye className="h-5 w-5" />} label="Total Views" value="0" accent="#00d4ff" />
-        <StatCard icon={<Zap className="h-5 w-5" />} label="Plan" value="Free" accent="#ff6b9d" />
+        <StatCard icon={<FolderOpen className="h-5 w-5" />} label="Portfolios" value={portfolioCount === null ? "—" : String(portfolioCount)} accent="var(--pf-accent)" />
+        <StatCard icon={<Eye className="h-5 w-5" />} label="Total Views" value={totalViews === null ? "—" : String(totalViews)} accent="#00d4ff" />
+        <StatCard icon={<Zap className="h-5 w-5" />} label="Plan" value={plan === "pro" ? "Pro" : "Free"} accent="#ff6b9d" />
       </motion.div>
 
       {/* Quick actions */}
@@ -110,7 +140,7 @@ export default function DashboardPage() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.15, duration: 0.3 }}
       >
-        <h2 className="mb-4 text-sm font-semibold uppercase tracking-wider text-[#7777aa]">
+        <h2 className="mb-4 text-sm font-semibold uppercase tracking-wider text-[var(--pf-muted)]">
           Get Started
         </h2>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
@@ -118,7 +148,7 @@ export default function DashboardPage() {
             <Link
               key={href}
               href={href}
-              className="group flex flex-col gap-3 rounded-xl border border-[rgba(108,99,255,0.15)] bg-[#13131e] p-5 transition-all hover:border-[rgba(108,99,255,0.4)] hover:bg-[#16161f]"
+              className="group flex flex-col gap-3 rounded-xl border border-[var(--pf-accent-soft)] bg-[var(--pf-surface)] p-5 transition-all hover:border-[var(--pf-border-hover)] hover:bg-[var(--pf-surface2)]"
             >
               <div className="flex items-center justify-between">
                 <div
@@ -128,16 +158,16 @@ export default function DashboardPage() {
                   <Icon className="h-5 w-5" style={{ color: accent }} />
                 </div>
                 {badge && (
-                  <span className="rounded-full bg-[rgba(108,99,255,0.15)] px-2 py-0.5 text-xs font-medium text-[#8b84ff]">
+                  <span className="rounded-full bg-[var(--pf-accent-soft)] px-2 py-0.5 text-xs font-medium text-[var(--pf-accent-text)]">
                     {badge}
                   </span>
                 )}
               </div>
               <div className="flex-1">
-                <p className="font-semibold text-[#e8e8f0]">{label}</p>
-                <p className="mt-0.5 text-sm text-[#7777aa]">{description}</p>
+                <p className="font-semibold text-[var(--pf-text)]">{label}</p>
+                <p className="mt-0.5 text-sm text-[var(--pf-muted)]">{description}</p>
               </div>
-              <ArrowRight className="h-4 w-4 text-[#7777aa] transition-transform group-hover:translate-x-1 group-hover:text-[#e8e8f0]" />
+              <ArrowRight className="h-4 w-4 text-[var(--pf-muted)] transition-transform group-hover:translate-x-1 group-hover:text-[var(--pf-text)]" />
             </Link>
           ))}
         </div>
@@ -148,9 +178,9 @@ export default function DashboardPage() {
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2, duration: 0.3 }}
-        className="rounded-xl border border-[rgba(108,99,255,0.1)] bg-[#13131e] p-5"
+        className="rounded-xl border border-[var(--pf-border-dim)] bg-[var(--pf-surface)] p-5"
       >
-        <p className="mb-4 text-xs font-semibold uppercase tracking-wider text-[#7777aa]">
+        <p className="mb-4 text-xs font-semibold uppercase tracking-wider text-[var(--pf-muted)]">
           How PortifyAI works
         </p>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
@@ -160,12 +190,12 @@ export default function DashboardPage() {
             { step: "3", label: "Go live", desc: "Share your portfolio URL instantly" },
           ].map(({ step, label, desc }) => (
             <div key={step} className="flex items-start gap-3">
-              <div className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full bg-[rgba(108,99,255,0.15)] text-xs font-bold text-[#6c63ff]">
+              <div className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full bg-[var(--pf-accent-soft)] text-xs font-bold text-[var(--pf-accent)]">
                 {step}
               </div>
               <div>
-                <p className="text-sm font-semibold text-[#e8e8f0]">{label}</p>
-                <p className="text-xs text-[#7777aa]">{desc}</p>
+                <p className="text-sm font-semibold text-[var(--pf-text)]">{label}</p>
+                <p className="text-xs text-[var(--pf-muted)]">{desc}</p>
               </div>
             </div>
           ))}
@@ -187,9 +217,9 @@ function StatCard({
   accent: string;
 }) {
   return (
-    <div className="rounded-xl border border-[rgba(108,99,255,0.15)] bg-[#13131e] p-5">
+    <div className="rounded-xl border border-[var(--pf-accent-soft)] bg-[var(--pf-surface)] p-5">
       <div className="flex items-center justify-between">
-        <p className="text-sm text-[#7777aa]">{label}</p>
+        <p className="text-sm text-[var(--pf-muted)]">{label}</p>
         <div
           className="flex h-8 w-8 items-center justify-center rounded-lg"
           style={{ background: `${accent}22`, color: accent }}
@@ -197,7 +227,7 @@ function StatCard({
           {icon}
         </div>
       </div>
-      <p className="mt-3 text-3xl font-bold text-[#e8e8f0]">{value}</p>
+      <p className="mt-3 text-3xl font-bold text-[var(--pf-text)]">{value}</p>
     </div>
   );
 }

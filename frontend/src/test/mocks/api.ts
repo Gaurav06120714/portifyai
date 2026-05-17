@@ -8,15 +8,10 @@
 import { vi } from "vitest";
 import type { UploadResumeResponse } from "@/types";
 
-export const mockUploadResume = vi.fn<
-  [File, string],
-  Promise<UploadResumeResponse>
->().mockResolvedValue({
+export const mockUploadResume = vi.fn<() => Promise<UploadResumeResponse>>().mockResolvedValue({
   resume_id: "test-resume-id-001",
   filename: "test_resume.pdf",
   message: "Resume uploaded successfully",
-  status: "done",
-  parsed_data: null,
 });
 
 export const mockGetResumes = vi.fn().mockResolvedValue({

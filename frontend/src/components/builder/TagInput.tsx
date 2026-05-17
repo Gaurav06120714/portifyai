@@ -42,19 +42,19 @@ export default function TagInput({
 
   return (
     <div
-      className="flex min-h-[52px] cursor-text flex-wrap gap-2 rounded-xl border border-[rgba(108,99,255,0.2)] bg-[#13131e] p-3 focus-within:border-[#6c63ff] transition-colors"
+      className="flex min-h-[52px] cursor-text flex-wrap gap-2 rounded-xl border border-[var(--pf-border-light)] bg-[var(--pf-surface)] p-3 focus-within:border-[var(--pf-accent)] transition-colors"
       onClick={() => inputRef.current?.focus()}
     >
       {tags.map((tag, i) => (
         <span
           key={i}
-          className="flex items-center gap-1.5 rounded-lg bg-[rgba(108,99,255,0.15)] px-2.5 py-1 text-sm text-[#8b84ff]"
+          className="flex items-center gap-1.5 rounded-lg bg-[var(--pf-accent-soft)] px-2.5 py-1 text-sm text-[var(--pf-accent-text)]"
         >
           {tag}
           <button
             type="button"
             onClick={(e) => { e.stopPropagation(); remove(i); }}
-            className="text-[#7777aa] hover:text-[#e8e8f0] transition-colors"
+            className="text-[var(--pf-muted)] hover:text-[var(--pf-text)] transition-colors"
           >
             <X className="h-3 w-3" />
           </button>
@@ -67,7 +67,7 @@ export default function TagInput({
         onKeyDown={onKey}
         onBlur={() => input && add(input)}
         placeholder={tags.length === 0 ? placeholder : "Add more…"}
-        className="min-w-[160px] flex-1 bg-transparent text-sm text-[#e8e8f0] placeholder-[#7777aa] outline-none"
+        className="min-w-[160px] flex-1 bg-transparent text-sm text-[var(--pf-text)] placeholder-[var(--pf-muted)] outline-none"
       />
     </div>
   );

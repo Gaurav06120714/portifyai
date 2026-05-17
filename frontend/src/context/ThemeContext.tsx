@@ -25,8 +25,8 @@ function getSystemTheme(): ResolvedTheme {
 }
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [mode, setModeState] = useState<ThemeMode>("light");
-  const [resolved, setResolved] = useState<ResolvedTheme>("light");
+  const [mode, setModeState] = useState<ThemeMode>("dark");
+  const [resolved, setResolved] = useState<ResolvedTheme>("dark");
 
   // Load saved preference
   useEffect(() => {

@@ -58,11 +58,11 @@ export default function ProfileDropdown() {
       <div className="flex items-center gap-2">
         <div
           className="h-8 w-8 animate-pulse rounded-full"
-          style={{ background: isLight ? "#e5e5ea" : "rgba(108,99,255,0.15)" }}
+          style={{ background: isLight ? "#e5e5ea" : "var(--pf-accent-soft)" }}
         />
         <div
           className="hidden h-4 w-16 animate-pulse rounded sm:block"
-          style={{ background: isLight ? "#e5e5ea" : "rgba(108,99,255,0.15)" }}
+          style={{ background: isLight ? "#e5e5ea" : "var(--pf-accent-soft)" }}
         />
       </div>
     );
@@ -88,8 +88,8 @@ export default function ProfileDropdown() {
         style={{
           background: open
             ? isLight
-              ? "rgba(108,99,255,0.08)"
-              : "rgba(108,99,255,0.12)"
+              ? "var(--pf-border-subtle)"
+              : "var(--pf-accent-subtle)"
             : "transparent",
         }}
       >
@@ -101,30 +101,30 @@ export default function ProfileDropdown() {
             height={32}
             className={`rounded-full ring-2 transition-all ${
               open
-                ? "ring-[#6c63ff]"
+                ? "ring-[var(--pf-accent)]"
                 : isLight
                   ? "ring-[rgba(0,0,0,0.06)]"
-                  : "ring-[rgba(108,99,255,0.2)]"
+                  : "ring-[var(--pf-border-light)]"
             }`}
           />
         ) : (
           <div
             className="flex h-8 w-8 items-center justify-center rounded-full text-sm font-bold text-white"
-            style={{ background: "#6c63ff" }}
+            style={{ background: "var(--pf-accent)" }}
           >
             {name.charAt(0).toUpperCase()}
           </div>
         )}
         <span
           className="hidden text-sm font-medium sm:block"
-          style={{ color: isLight ? "#1a1a2e" : "#e8e8f0" }}
+          style={{ color: isLight ? "#1a1a2e" : "var(--pf-text)" }}
         >
           {name}
         </span>
         <ChevronDown
           className="h-3.5 w-3.5 transition-transform duration-200"
           style={{
-            color: isLight ? "#666688" : "#7777aa",
+            color: isLight ? "#666688" : "var(--pf-muted)",
             transform: open ? "rotate(180deg)" : "rotate(0)",
           }}
         />
@@ -139,8 +139,8 @@ export default function ProfileDropdown() {
             transition={{ duration: 0.15, ease: "easeOut" }}
             className="absolute right-0 top-full mt-2 w-64 overflow-hidden rounded-xl border shadow-xl"
             style={{
-              background: isLight ? "#ffffff" : "#13131e",
-              borderColor: isLight ? "rgba(0,0,0,0.08)" : "rgba(108,99,255,0.15)",
+              background: isLight ? "#ffffff" : "var(--pf-surface)",
+              borderColor: isLight ? "rgba(0,0,0,0.08)" : "var(--pf-accent-soft)",
               boxShadow: isLight
                 ? "0 20px 60px rgba(0,0,0,0.12)"
                 : "0 20px 60px rgba(0,0,0,0.5)",
@@ -149,7 +149,7 @@ export default function ProfileDropdown() {
             {/* User info header */}
             <div
               className="border-b px-4 py-3"
-              style={{ borderColor: isLight ? "rgba(0,0,0,0.06)" : "rgba(108,99,255,0.1)" }}
+              style={{ borderColor: isLight ? "rgba(0,0,0,0.06)" : "var(--pf-border-dim)" }}
             >
               <div className="flex items-center gap-3">
                 {avatarUrl ? (
@@ -161,20 +161,20 @@ export default function ProfileDropdown() {
                     className="rounded-full"
                   />
                 ) : (
-                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#6c63ff] text-sm font-bold text-white">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--pf-accent)] text-sm font-bold text-white">
                     {name.charAt(0).toUpperCase()}
                   </div>
                 )}
                 <div className="min-w-0 flex-1">
                   <p
                     className="truncate text-sm font-semibold"
-                    style={{ color: isLight ? "#1a1a2e" : "#e8e8f0" }}
+                    style={{ color: isLight ? "#1a1a2e" : "var(--pf-text)" }}
                   >
                     {user.fullName ?? name}
                   </p>
                   <p
                     className="truncate text-xs"
-                    style={{ color: isLight ? "#888" : "#7777aa" }}
+                    style={{ color: isLight ? "#888" : "var(--pf-muted)" }}
                   >
                     {email}
                   </p>
@@ -193,14 +193,14 @@ export default function ProfileDropdown() {
                   style={{ color: isLight ? "#444" : "#c8c8e8" }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.background = isLight
-                      ? "rgba(108,99,255,0.06)"
-                      : "rgba(108,99,255,0.08)";
+                      ? "var(--pf-border-faint)"
+                      : "var(--pf-border-subtle)";
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.background = "transparent";
                   }}
                 >
-                  <Icon className="h-4 w-4" style={{ color: isLight ? "#888" : "#7777aa" }} />
+                  <Icon className="h-4 w-4" style={{ color: isLight ? "#888" : "var(--pf-muted)" }} />
                   {label}
                 </Link>
               ))}
@@ -209,7 +209,7 @@ export default function ProfileDropdown() {
             {/* Logout */}
             <div
               className="border-t py-1.5"
-              style={{ borderColor: isLight ? "rgba(0,0,0,0.06)" : "rgba(108,99,255,0.1)" }}
+              style={{ borderColor: isLight ? "rgba(0,0,0,0.06)" : "var(--pf-border-dim)" }}
             >
               <button
                 onClick={handleSignOut}

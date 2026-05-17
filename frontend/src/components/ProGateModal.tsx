@@ -46,41 +46,41 @@ export default function ProGateModal({ open, onClose, featureName }: Props) {
             transition={{ duration: 0.2, ease: "easeOut" }}
             className="fixed inset-0 z-50 flex items-center justify-center p-4"
           >
-            <div className="relative w-full max-w-md overflow-hidden rounded-2xl border border-[rgba(108,99,255,0.3)] bg-[#13131e] shadow-[0_0_80px_rgba(108,99,255,0.15)]">
+            <div className="relative w-full max-w-md overflow-hidden rounded-2xl border border-[var(--pf-border-hover)] bg-[var(--pf-surface)] shadow-[0_0_80px_var(--pf-accent-soft)]">
               {/* Glow top bar */}
-              <div className="h-1 w-full bg-gradient-to-r from-[#6c63ff] to-[#00d4ff]" />
+              <div className="h-1 w-full bg-gradient-to-r from-[var(--pf-accent)] to-[#00d4ff]" />
 
               {/* Close */}
               <button
                 onClick={onClose}
-                className="absolute right-4 top-4 flex h-7 w-7 items-center justify-center rounded-lg text-[#7777aa] hover:bg-[rgba(108,99,255,0.1)] hover:text-[#e8e8f0] transition-colors"
+                className="absolute right-4 top-4 flex h-7 w-7 items-center justify-center rounded-lg text-[var(--pf-muted)] hover:bg-[var(--pf-border-dim)] hover:text-[var(--pf-text)] transition-colors"
               >
                 <X className="h-4 w-4" />
               </button>
 
               <div className="p-7">
                 {/* Icon */}
-                <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-[rgba(108,99,255,0.15)]">
-                  <Zap className="h-6 w-6 text-[#6c63ff]" />
+                <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-[var(--pf-accent-soft)]">
+                  <Zap className="h-6 w-6 text-[var(--pf-accent)]" />
                 </div>
 
                 {/* Heading */}
-                <h2 className="text-xl font-bold text-[#e8e8f0]">
+                <h2 className="text-xl font-bold text-[var(--pf-text)]">
                   {featureName
                     ? `"${featureName}" is a Pro feature`
                     : "Upgrade to PortifyAI Pro"}
                 </h2>
-                <p className="mt-1.5 text-sm text-[#7777aa]">
+                <p className="mt-1.5 text-sm text-[var(--pf-muted)]">
                   Get unlimited portfolios, all templates, and AI-powered features for{" "}
-                  <span className="font-semibold text-[#e8e8f0]">$9/month</span>.
+                  <span className="font-semibold text-[var(--pf-text)]">$9/month</span>.
                 </p>
 
                 {/* Perks */}
                 <ul className="mt-5 space-y-2">
                   {PRO_PERKS.map((perk) => (
-                    <li key={perk} className="flex items-center gap-2.5 text-sm text-[#e8e8f0]">
-                      <div className="flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-[rgba(108,99,255,0.15)]">
-                        <Check className="h-3 w-3 text-[#6c63ff]" />
+                    <li key={perk} className="flex items-center gap-2.5 text-sm text-[var(--pf-text)]">
+                      <div className="flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-[var(--pf-accent-soft)]">
+                        <Check className="h-3 w-3 text-[var(--pf-accent)]" />
                       </div>
                       {perk}
                     </li>
@@ -91,13 +91,13 @@ export default function ProGateModal({ open, onClose, featureName }: Props) {
                 <div className="mt-6 flex gap-3">
                   <button
                     onClick={() => { onClose(); router.push("/pricing"); }}
-                    className="flex-1 rounded-xl bg-[#6c63ff] py-3 text-sm font-semibold text-white shadow-[0_0_24px_rgba(108,99,255,0.3)] hover:bg-[#5a53e0] transition-colors"
+                    className="flex-1 rounded-xl bg-[var(--pf-accent)] py-3 text-sm font-semibold text-white shadow-[0_0_24px_var(--pf-border-hover)] hover:bg-[var(--pf-accent-hover)] transition-colors"
                   >
                     Upgrade to Pro — $9/mo
                   </button>
                   <button
                     onClick={onClose}
-                    className="rounded-xl border border-[rgba(108,99,255,0.2)] px-4 py-3 text-sm text-[#7777aa] hover:text-[#e8e8f0] transition-colors"
+                    className="rounded-xl border border-[var(--pf-border-light)] px-4 py-3 text-sm text-[var(--pf-muted)] hover:text-[var(--pf-text)] transition-colors"
                   >
                     Maybe later
                   </button>

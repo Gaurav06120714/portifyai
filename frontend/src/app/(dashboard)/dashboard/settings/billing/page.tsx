@@ -106,8 +106,8 @@ function BillingPageInner() {
   return (
     <div className="max-w-2xl space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-[#e8e8f0]">Billing &amp; Plan</h1>
-        <p className="mt-1 text-[#7777aa]">Manage your subscription and payment details.</p>
+        <h1 className="text-2xl font-bold text-[var(--pf-text)]">Billing &amp; Plan</h1>
+        <p className="mt-1 text-[var(--pf-muted)]">Manage your subscription and payment details.</p>
       </div>
 
       {/* Current plan card */}
@@ -117,57 +117,57 @@ function BillingPageInner() {
         transition={{ duration: 0.25 }}
         className={`rounded-xl border p-6 ${
           plan === "pro"
-            ? "border-[#6c63ff] bg-[rgba(108,99,255,0.06)] shadow-[0_0_30px_rgba(108,99,255,0.08)]"
-            : "border-[rgba(108,99,255,0.15)] bg-[#13131e]"
+            ? "border-[var(--pf-accent)] bg-[var(--pf-border-faint)] shadow-[0_0_30px_var(--pf-border-subtle)]"
+            : "border-[var(--pf-accent-soft)] bg-[var(--pf-surface)]"
         }`}
       >
         <div className="flex items-start justify-between gap-4">
           <div className="flex items-center gap-3">
             <div
               className={`flex h-10 w-10 items-center justify-center rounded-xl ${
-                plan === "pro" ? "bg-[rgba(108,99,255,0.2)]" : "bg-[rgba(108,99,255,0.1)]"
+                plan === "pro" ? "bg-[var(--pf-border-light)]" : "bg-[var(--pf-border-dim)]"
               }`}
             >
-              <Zap className={`h-5 w-5 ${plan === "pro" ? "text-[#6c63ff]" : "text-[#7777aa]"}`} />
+              <Zap className={`h-5 w-5 ${plan === "pro" ? "text-[var(--pf-accent)]" : "text-[var(--pf-muted)]"}`} />
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <p className="font-bold text-[#e8e8f0] text-lg capitalize">{plan} Plan</p>
+                <p className="font-bold text-[var(--pf-text)] text-lg capitalize">{plan} Plan</p>
                 {plan === "pro" && (
-                  <span className="rounded-full bg-[rgba(108,99,255,0.2)] px-2 py-0.5 text-xs font-semibold text-[#6c63ff]">
+                  <span className="rounded-full bg-[var(--pf-border-light)] px-2 py-0.5 text-xs font-semibold text-[var(--pf-accent)]">
                     ACTIVE
                   </span>
                 )}
               </div>
-              <p className="text-sm text-[#7777aa]">
+              <p className="text-sm text-[var(--pf-muted)]">
                 {plan === "pro" ? "$9 / month" : "Free forever"}
               </p>
             </div>
           </div>
 
-          {loading && <Loader2 className="h-4 w-4 animate-spin text-[#7777aa]" />}
+          {loading && <Loader2 className="h-4 w-4 animate-spin text-[var(--pf-muted)]" />}
         </div>
 
         {/* Subscription details */}
         {status && plan === "pro" && (
           <div className="mt-4 grid grid-cols-2 gap-3">
-            <div className="flex items-center gap-2 rounded-lg bg-[rgba(108,99,255,0.08)] px-3 py-2.5">
+            <div className="flex items-center gap-2 rounded-lg bg-[var(--pf-border-subtle)] px-3 py-2.5">
               <CheckCircle className="h-4 w-4 flex-shrink-0 text-green-400" />
               <div>
-                <p className="text-xs text-[#7777aa]">Status</p>
-                <p className="text-sm font-medium capitalize text-[#e8e8f0]">
+                <p className="text-xs text-[var(--pf-muted)]">Status</p>
+                <p className="text-sm font-medium capitalize text-[var(--pf-text)]">
                   {status.subscription_status ?? "active"}
                 </p>
               </div>
             </div>
             {renewalDate && (
-              <div className="flex items-center gap-2 rounded-lg bg-[rgba(108,99,255,0.08)] px-3 py-2.5">
-                <Calendar className="h-4 w-4 flex-shrink-0 text-[#7777aa]" />
+              <div className="flex items-center gap-2 rounded-lg bg-[var(--pf-border-subtle)] px-3 py-2.5">
+                <Calendar className="h-4 w-4 flex-shrink-0 text-[var(--pf-muted)]" />
                 <div>
-                  <p className="text-xs text-[#7777aa]">
+                  <p className="text-xs text-[var(--pf-muted)]">
                     {status.cancel_at_period_end ? "Cancels" : "Renews"}
                   </p>
-                  <p className="text-sm font-medium text-[#e8e8f0]">{renewalDate}</p>
+                  <p className="text-sm font-medium text-[var(--pf-text)]">{renewalDate}</p>
                 </div>
               </div>
             )}
@@ -189,16 +189,16 @@ function BillingPageInner() {
         className="space-y-3"
       >
         {plan === "free" ? (
-          <div className="rounded-xl border border-[rgba(108,99,255,0.15)] bg-[#13131e] p-5">
-            <h3 className="font-semibold text-[#e8e8f0]">Upgrade to Pro</h3>
-            <p className="mt-1 text-sm text-[#7777aa]">
+          <div className="rounded-xl border border-[var(--pf-accent-soft)] bg-[var(--pf-surface)] p-5">
+            <h3 className="font-semibold text-[var(--pf-text)]">Upgrade to Pro</h3>
+            <p className="mt-1 text-sm text-[var(--pf-muted)]">
               Unlimited portfolios, all templates, AI skill suggestions, and more — for $9/month.
             </p>
             <div className="mt-4 flex gap-3">
               <button
                 onClick={handleUpgrade}
                 disabled={checkoutLoading}
-                className="flex items-center gap-2 rounded-xl bg-[#6c63ff] px-5 py-2.5 text-sm font-semibold text-white hover:bg-[#5a53e0] transition-colors disabled:opacity-60"
+                className="flex items-center gap-2 rounded-xl bg-[var(--pf-accent)] px-5 py-2.5 text-sm font-semibold text-white hover:bg-[var(--pf-accent-hover)] transition-colors disabled:opacity-60"
               >
                 {checkoutLoading ? (
                   <><Loader2 className="h-4 w-4 animate-spin" /> Redirecting…</>
@@ -208,21 +208,21 @@ function BillingPageInner() {
               </button>
               <Link
                 href="/pricing"
-                className="flex items-center gap-1.5 rounded-xl border border-[rgba(108,99,255,0.2)] px-4 py-2.5 text-sm text-[#7777aa] hover:text-[#e8e8f0] transition-colors"
+                className="flex items-center gap-1.5 rounded-xl border border-[var(--pf-border-light)] px-4 py-2.5 text-sm text-[var(--pf-muted)] hover:text-[var(--pf-text)] transition-colors"
               >
                 See full comparison
               </Link>
             </div>
           </div>
         ) : (
-          <div className="rounded-xl border border-[rgba(108,99,255,0.15)] bg-[#13131e] p-5">
+          <div className="rounded-xl border border-[var(--pf-accent-soft)] bg-[var(--pf-surface)] p-5">
             <div className="flex items-center gap-3">
-              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[rgba(108,99,255,0.1)]">
-                <CreditCard className="h-4 w-4 text-[#6c63ff]" />
+              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[var(--pf-border-dim)]">
+                <CreditCard className="h-4 w-4 text-[var(--pf-accent)]" />
               </div>
               <div>
-                <h3 className="font-semibold text-[#e8e8f0]">Manage subscription</h3>
-                <p className="text-sm text-[#7777aa]">
+                <h3 className="font-semibold text-[var(--pf-text)]">Manage subscription</h3>
+                <p className="text-sm text-[var(--pf-muted)]">
                   Update payment method, download invoices, or cancel.
                 </p>
               </div>
@@ -230,7 +230,7 @@ function BillingPageInner() {
             <button
               onClick={handlePortal}
               disabled={portalLoading}
-              className="mt-4 flex items-center gap-2 rounded-xl border border-[rgba(108,99,255,0.2)] px-4 py-2.5 text-sm font-semibold text-[#e8e8f0] hover:border-[rgba(108,99,255,0.5)] transition-colors disabled:opacity-60"
+              className="mt-4 flex items-center gap-2 rounded-xl border border-[var(--pf-border-light)] px-4 py-2.5 text-sm font-semibold text-[var(--pf-text)] hover:border-[rgba(108,99,255,0.5)] transition-colors disabled:opacity-60"
             >
               {portalLoading ? (
                 <><Loader2 className="h-4 w-4 animate-spin" /> Opening portal…</>
@@ -244,7 +244,7 @@ function BillingPageInner() {
         {/* Refresh status */}
         <button
           onClick={() => { setLoading(true); fetchStatus(); }}
-          className="flex items-center gap-1.5 text-xs text-[#7777aa] hover:text-[#e8e8f0] transition-colors"
+          className="flex items-center gap-1.5 text-xs text-[var(--pf-muted)] hover:text-[var(--pf-text)] transition-colors"
         >
           <RefreshCw className="h-3 w-3" /> Refresh billing status
         </button>
@@ -256,9 +256,9 @@ function BillingPageInner() {
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.14, duration: 0.25 }}
-          className="rounded-xl border border-[rgba(108,99,255,0.12)] bg-[#13131e] p-5"
+          className="rounded-xl border border-[var(--pf-accent-subtle)] bg-[var(--pf-surface)] p-5"
         >
-          <p className="mb-3 text-sm font-semibold uppercase tracking-wider text-[#7777aa]">
+          <p className="mb-3 text-sm font-semibold uppercase tracking-wider text-[var(--pf-muted)]">
             Pro includes
           </p>
           <div className="grid grid-cols-2 gap-2">
@@ -270,8 +270,8 @@ function BillingPageInner() {
               "No branding",
               "Custom domain",
             ].map((f) => (
-              <div key={f} className="flex items-center gap-2 text-sm text-[#7777aa]">
-                <div className="h-1.5 w-1.5 flex-shrink-0 rounded-full bg-[#6c63ff]" />
+              <div key={f} className="flex items-center gap-2 text-sm text-[var(--pf-muted)]">
+                <div className="h-1.5 w-1.5 flex-shrink-0 rounded-full bg-[var(--pf-accent)]" />
                 {f}
               </div>
             ))}
@@ -284,7 +284,7 @@ function BillingPageInner() {
 
 export default function BillingPage() {
   return (
-    <Suspense fallback={<div className="flex h-40 items-center justify-center"><Loader2 className="h-5 w-5 animate-spin text-[#6c63ff]" /></div>}>
+    <Suspense fallback={<div className="flex h-40 items-center justify-center"><Loader2 className="h-5 w-5 animate-spin text-[var(--pf-accent)]" /></div>}>
       <BillingPageInner />
     </Suspense>
   );

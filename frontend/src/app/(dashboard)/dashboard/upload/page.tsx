@@ -16,7 +16,7 @@ const TEMPLATES = [
     name: "Aurora",
     tagline: "Dark electric",
     bg: "#0F0F1A",
-    accent: "#6c63ff",
+    accent: "var(--pf-accent)",
     secondary: "#00d4ff",
   },
   {
@@ -79,8 +79,8 @@ function UploadPageInner() {
     <div className="max-w-2xl mx-auto space-y-8">
       {/* Header */}
       <div>
-        <h1 className="text-2xl font-bold text-[#e8e8f0]">Upload Resume</h1>
-        <p className="mt-1 text-[#7777aa]">
+        <h1 className="text-2xl font-bold text-[var(--pf-text)]">Upload Resume</h1>
+        <p className="mt-1 text-[var(--pf-muted)]">
           Upload your resume and we&apos;ll generate a stunning portfolio in seconds.
         </p>
       </div>
@@ -94,16 +94,16 @@ function UploadPageInner() {
             <div key={label} className="flex items-center gap-2">
               <motion.div
                 animate={{
-                  background: done ? "#22c55e" : active ? "#6c63ff" : "rgba(108,99,255,0.1)",
+                  background: done ? "#22c55e" : active ? "var(--pf-accent)" : "var(--pf-border-dim)",
                 }}
                 className="flex h-6 w-6 items-center justify-center rounded-full text-xs font-bold text-white"
               >
                 {done ? "✓" : i + 1}
               </motion.div>
-              <span className={`text-sm ${active || done ? "text-[#e8e8f0]" : "text-[#7777aa]"}`}>
+              <span className={`text-sm ${active || done ? "text-[var(--pf-text)]" : "text-[var(--pf-muted)]"}`}>
                 {label}
               </span>
-              {i < 2 && <div className="h-px w-8 bg-[rgba(108,99,255,0.2)]" />}
+              {i < 2 && <div className="h-px w-8 bg-[var(--pf-border-light)]" />}
             </div>
           );
         })}
@@ -137,13 +137,13 @@ function UploadPageInner() {
               <Check className="h-4 w-4 text-green-400 flex-shrink-0" />
               <div>
                 <p className="text-sm font-medium text-green-400">Resume uploaded</p>
-                <p className="text-xs text-[#7777aa]">{resumeResult?.filename}</p>
+                <p className="text-xs text-[var(--pf-muted)]">{resumeResult?.filename}</p>
               </div>
             </div>
 
             {/* Template picker */}
             <div>
-              <p className="mb-3 text-sm font-semibold uppercase tracking-wider text-[#7777aa]">
+              <p className="mb-3 text-sm font-semibold uppercase tracking-wider text-[var(--pf-muted)]">
                 Choose a template
               </p>
               <div className="grid grid-cols-3 gap-3">
@@ -153,8 +153,8 @@ function UploadPageInner() {
                     onClick={() => setSelectedTemplate(t.id)}
                     className={`group relative overflow-hidden rounded-xl border text-left transition-all duration-200 ${
                       selectedTemplate === t.id
-                        ? "border-[#6c63ff] shadow-[0_0_0_1px_#6c63ff]"
-                        : "border-[rgba(108,99,255,0.15)] hover:border-[rgba(108,99,255,0.4)]"
+                        ? "border-[var(--pf-accent)] shadow-[0_0_0_1px_var(--pf-accent)]"
+                        : "border-[var(--pf-accent-soft)] hover:border-[var(--pf-border-hover)]"
                     }`}
                   >
                     {/* Preview */}
@@ -176,15 +176,15 @@ function UploadPageInner() {
                         <motion.div
                           initial={{ scale: 0 }}
                           animate={{ scale: 1 }}
-                          className="absolute right-1.5 top-1.5 flex h-5 w-5 items-center justify-center rounded-full bg-[#6c63ff]"
+                          className="absolute right-1.5 top-1.5 flex h-5 w-5 items-center justify-center rounded-full bg-[var(--pf-accent)]"
                         >
                           <Check className="h-3 w-3 text-white" />
                         </motion.div>
                       )}
                     </div>
-                    <div className="bg-[#13131e] px-3 py-2">
-                      <p className="text-sm font-semibold text-[#e8e8f0]">{t.name}</p>
-                      <p className="text-[10px] text-[#7777aa]">{t.tagline}</p>
+                    <div className="bg-[var(--pf-surface)] px-3 py-2">
+                      <p className="text-sm font-semibold text-[var(--pf-text)]">{t.name}</p>
+                      <p className="text-[10px] text-[var(--pf-muted)]">{t.tagline}</p>
                     </div>
                   </button>
                 ))}
@@ -195,7 +195,7 @@ function UploadPageInner() {
             <button
               onClick={handleGenerate}
               disabled={generating}
-              className="flex w-full items-center justify-center gap-2 rounded-xl bg-[#6c63ff] py-3.5 font-semibold text-white shadow-[0_0_24px_rgba(108,99,255,0.3)] transition-all hover:bg-[#5a53e0] hover:shadow-[0_0_32px_rgba(108,99,255,0.5)] disabled:opacity-60"
+              className="flex w-full items-center justify-center gap-2 rounded-xl bg-[var(--pf-accent)] py-3.5 font-semibold text-white shadow-[0_0_24px_var(--pf-border-hover)] transition-all hover:bg-[var(--pf-accent-hover)] hover:shadow-[0_0_32px_rgba(108,99,255,0.5)] disabled:opacity-60"
             >
               {generating ? (
                 <>
@@ -213,7 +213,7 @@ function UploadPageInner() {
 
             <button
               onClick={() => setStage("upload")}
-              className="w-full text-center text-sm text-[#7777aa] hover:text-[#e8e8f0] transition-colors"
+              className="w-full text-center text-sm text-[var(--pf-muted)] hover:text-[var(--pf-text)] transition-colors"
             >
               ← Upload a different resume
             </button>

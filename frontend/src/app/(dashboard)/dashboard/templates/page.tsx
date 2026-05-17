@@ -13,7 +13,7 @@ const TEMPLATES = [
     description:
       "A dark, electric portfolio with animated gradient hero, glowing project cards, and Space Grotesk typography. Built for developers and designers who want to command attention.",
     bg: "#0F0F1A",
-    accent: "#6c63ff",
+    accent: "var(--pf-accent)",
     secondary: "#00d4ff",
     tags: ["Dark", "Animated", "Developer"],
     features: [
@@ -25,8 +25,8 @@ const TEMPLATES = [
     ],
     preview: {
       nav: "#1a1a2e",
-      hero: "linear-gradient(135deg, #6c63ff22, #00d4ff11)",
-      card: "#13131e",
+      hero: "linear-gradient(135deg, var(--pf-accent)22, #00d4ff11)",
+      card: "var(--pf-surface)",
     },
   },
   {
@@ -75,6 +75,29 @@ const TEMPLATES = [
       card: "rgba(255,255,255,0.04)",
     },
   },
+  {
+    id: "executive" as const,
+    name: "Executive",
+    tagline: "Two-column serif — refined leadership presence",
+    description:
+      "A sophisticated two-column layout with a dark sidebar and light main content area. Playfair Display serif headings, gold accents, and editorial spacing. Perfect for senior engineers, managers, and executives.",
+    bg: "#FAFAF8",
+    accent: "#D4A853",
+    secondary: "#111827",
+    tags: ["Light", "Serif", "Executive"],
+    features: [
+      "Two-column sidebar layout",
+      "Playfair Display serif headings",
+      "Gold accent palette",
+      "Numbered section markers",
+      "Skills in sidebar",
+    ],
+    preview: {
+      nav: "#111827",
+      hero: "linear-gradient(135deg, #D4A85311, #FAFAF8)",
+      card: "#ffffff",
+    },
+  },
 ];
 
 type ViewMode = "desktop" | "mobile";
@@ -94,21 +117,21 @@ export default function TemplatesPage() {
       {/* Header */}
       <div className="flex items-end justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-[#e8e8f0]">Templates</h1>
-          <p className="mt-1 text-[#7777aa]">
+          <h1 className="text-2xl font-bold text-[var(--pf-text)]">Templates</h1>
+          <p className="mt-1 text-[var(--pf-muted)]">
             Choose the perfect style for your portfolio — all are responsive and SEO-ready.
           </p>
         </div>
         {/* Viewport toggle */}
-        <div className="flex items-center rounded-lg border border-[rgba(108,99,255,0.15)] bg-[#13131e] p-0.5">
+        <div className="flex items-center rounded-lg border border-[var(--pf-accent-soft)] bg-[var(--pf-surface)] p-0.5">
           {(["desktop", "mobile"] as ViewMode[]).map((m) => (
             <button
               key={m}
               onClick={() => setViewMode(m)}
               className={`flex h-7 items-center gap-1.5 rounded-md px-3 text-xs font-medium transition-colors ${
                 viewMode === m
-                  ? "bg-[rgba(108,99,255,0.2)] text-[#8b84ff]"
-                  : "text-[#7777aa] hover:text-[#e8e8f0]"
+                  ? "bg-[var(--pf-border-light)] text-[var(--pf-accent-text)]"
+                  : "text-[var(--pf-muted)] hover:text-[var(--pf-text)]"
               }`}
             >
               {m === "desktop" ? <Monitor className="h-3.5 w-3.5" /> : <Smartphone className="h-3.5 w-3.5" />}
@@ -119,7 +142,7 @@ export default function TemplatesPage() {
       </div>
 
       {/* Grid */}
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
         {TEMPLATES.map((t, i) => (
           <motion.div
             key={t.id}
@@ -131,8 +154,8 @@ export default function TemplatesPage() {
             onClick={() => setSelected(t.id === selected ? null : t.id)}
             className={`group relative cursor-pointer overflow-hidden rounded-xl border transition-all duration-200 ${
               selected === t.id
-                ? "border-[#6c63ff] shadow-[0_0_0_1px_#6c63ff,0_0_24px_rgba(108,99,255,0.2)]"
-                : "border-[rgba(108,99,255,0.15)] hover:border-[rgba(108,99,255,0.4)]"
+                ? "border-[var(--pf-accent)] shadow-[0_0_0_1px_var(--pf-accent),0_0_24px_var(--pf-border-light)]"
+                : "border-[var(--pf-accent-soft)] hover:border-[var(--pf-border-hover)]"
             }`}
           >
             {/* Template preview */}
@@ -210,7 +233,7 @@ export default function TemplatesPage() {
                 <motion.div
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
-                  className="absolute right-2 top-2 flex h-6 w-6 items-center justify-center rounded-full bg-[#6c63ff]"
+                  className="absolute right-2 top-2 flex h-6 w-6 items-center justify-center rounded-full bg-[var(--pf-accent)]"
                 >
                   <Check className="h-3.5 w-3.5 text-white" />
                 </motion.div>
@@ -218,22 +241,22 @@ export default function TemplatesPage() {
             </div>
 
             {/* Info */}
-            <div className="bg-[#13131e] p-4 space-y-3">
+            <div className="bg-[var(--pf-surface)] p-4 space-y-3">
               <div>
                 <div className="flex items-center gap-2">
-                  <h3 className="font-bold text-[#e8e8f0]">{t.name}</h3>
+                  <h3 className="font-bold text-[var(--pf-text)]">{t.name}</h3>
                   <div className="flex gap-1">
                     {t.tags.map((tag) => (
                       <span
                         key={tag}
-                        className="rounded-full border border-[rgba(108,99,255,0.2)] px-1.5 py-0.5 text-[10px] text-[#7777aa]"
+                        className="rounded-full border border-[var(--pf-border-light)] px-1.5 py-0.5 text-[10px] text-[var(--pf-muted)]"
                       >
                         {tag}
                       </span>
                     ))}
                   </div>
                 </div>
-                <p className="mt-0.5 text-xs text-[#7777aa]">{t.tagline}</p>
+                <p className="mt-0.5 text-xs text-[var(--pf-muted)]">{t.tagline}</p>
               </div>
 
               <button
@@ -272,16 +295,16 @@ export default function TemplatesPage() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 8 }}
               transition={{ duration: 0.22 }}
-              className="rounded-xl border border-[rgba(108,99,255,0.2)] bg-[#13131e] p-6"
+              className="rounded-xl border border-[var(--pf-border-light)] bg-[var(--pf-surface)] p-6"
             >
               <div className="flex items-start justify-between gap-4">
                 <div className="flex-1">
-                  <h2 className="text-lg font-bold text-[#e8e8f0]">{t.name}</h2>
-                  <p className="mt-1 text-sm text-[#7777aa]">{t.description}</p>
+                  <h2 className="text-lg font-bold text-[var(--pf-text)]">{t.name}</h2>
+                  <p className="mt-1 text-sm text-[var(--pf-muted)]">{t.description}</p>
                 </div>
                 <button
                   onClick={() => setSelected(null)}
-                  className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-lg text-[#7777aa] hover:text-[#e8e8f0]"
+                  className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-lg text-[var(--pf-muted)] hover:text-[var(--pf-text)]"
                 >
                   <X className="h-4 w-4" />
                 </button>
@@ -289,7 +312,7 @@ export default function TemplatesPage() {
 
               <div className="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-3">
                 {t.features.map((f) => (
-                  <div key={f} className="flex items-center gap-2 text-sm text-[#7777aa]">
+                  <div key={f} className="flex items-center gap-2 text-sm text-[var(--pf-muted)]">
                     <div
                       className="h-1.5 w-1.5 flex-shrink-0 rounded-full"
                       style={{ background: t.accent }}

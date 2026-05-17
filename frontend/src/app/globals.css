@@ -26,6 +26,33 @@
 
 :root {
   --radius: 0.75rem;
+
+  /* ── PortifyAI Dashboard palette — LIGHT ─────────────────────────────── */
+  --pf-bg: #f4f4ff;
+  --pf-surface: #ffffff;
+  --pf-surface2: #eeeeff;
+  --pf-text: #1a1a2e;
+  --pf-text-dim: #2a2a4e;
+  --pf-muted: #6b7280;
+  --pf-muted-dim: #9ca3af;
+  --pf-muted-darker: #d1d5db;
+  --pf-muted-darkest: #e5e7eb;
+  --pf-accent: #6c63ff;
+  --pf-accent-hover: #5a53e0;
+  --pf-accent-text: #6c63ff;
+  --pf-border: rgba(108,99,255,0.18);
+  --pf-border-dim: rgba(108,99,255,0.1);
+  --pf-border-subtle: rgba(108,99,255,0.07);
+  --pf-border-light: rgba(108,99,255,0.15);
+  --pf-border-medium: rgba(108,99,255,0.22);
+  --pf-border-hover: rgba(108,99,255,0.45);
+  --pf-border-faint: rgba(108,99,255,0.05);
+  --pf-accent-subtle: rgba(108,99,255,0.1);
+  --pf-accent-soft: rgba(108,99,255,0.12);
+  --pf-sidebar: #1e1b4b;
+  --pf-sidebar-text: #e0e0f0;
+  --pf-sidebar-muted: #9090bb;
+
   /* Premium Light Palette: Crisp Slate & Electric Indigo */
   --background: #f8fafc;
   --foreground: #0f172a;
@@ -46,6 +73,32 @@
 }
 
 .dark {
+  /* ── PortifyAI Dashboard palette — DARK ──────────────────────────────── */
+  --pf-bg: #0d0d14;
+  --pf-surface: #13131e;
+  --pf-surface2: #16161f;
+  --pf-text: #e8e8f0;
+  --pf-text-dim: #c8c8e0;
+  --pf-muted: #7777aa;
+  --pf-muted-dim: #555577;
+  --pf-muted-darker: #444466;
+  --pf-muted-darkest: #333355;
+  --pf-accent: #6c63ff;
+  --pf-accent-hover: #5a53e0;
+  --pf-accent-text: #8b84ff;
+  --pf-border: rgba(108,99,255,0.15);
+  --pf-border-dim: rgba(108,99,255,0.1);
+  --pf-border-subtle: rgba(108,99,255,0.08);
+  --pf-border-light: rgba(108,99,255,0.2);
+  --pf-border-medium: rgba(108,99,255,0.25);
+  --pf-border-hover: rgba(108,99,255,0.4);
+  --pf-border-faint: rgba(108,99,255,0.06);
+  --pf-accent-subtle: rgba(108,99,255,0.12);
+  --pf-accent-soft: rgba(108,99,255,0.15);
+  --pf-sidebar: #0d0d14;
+  --pf-sidebar-text: #e8e8f0;
+  --pf-sidebar-muted: #7777aa;
+
   /* Premium Dark Palette: Deep Obsidian & Cyber Violet */
   --background: #020617;
   --foreground: #f8fafc;
@@ -70,11 +123,19 @@
 html { scroll-behavior: smooth; }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: var(--pf-bg);
+  color: var(--pf-text);
   font-family: var(--font-space-grotesk), var(--font-geist-sans), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   min-height: 100dvh;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+/* Smooth theme transitions on all elements */
+*, *::before, *::after {
+  transition-property: background-color, border-color, color, fill, stroke;
+  transition-timing-function: ease;
+  transition-duration: 0.2s;
 }
 
 ::-webkit-scrollbar { width: 5px; height: 5px; }

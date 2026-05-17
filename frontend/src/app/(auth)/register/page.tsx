@@ -11,13 +11,13 @@ export default function RegisterPage() {
       <div className="text-center">
         <h1
           className="text-2xl font-bold transition-colors duration-300"
-          style={{ color: isLight ? "#1a1a2e" : "#e8e8f0" }}
+          style={{ color: isLight ? "#1a1a2e" : "var(--pf-text)" }}
         >
           Create your account
         </h1>
         <p
           className="mt-1 text-sm transition-colors duration-300"
-          style={{ color: isLight ? "#666688" : "#7777aa" }}
+          style={{ color: isLight ? "#666688" : "var(--pf-muted)" }}
         >
           Start building your AI portfolio today
         </p>
@@ -28,12 +28,12 @@ export default function RegisterPage() {
         fallbackRedirectUrl="/dashboard"
         appearance={{
           variables: {
-            colorBackground: isLight ? "#ffffff" : "#13131e",
+            colorBackground: isLight ? "#ffffff" : "var(--pf-surface)",
             colorInputBackground: isLight ? "#f5f5f7" : "#1a1a2e",
-            colorInputText: isLight ? "#1a1a2e" : "#e8e8f0",
-            colorText: isLight ? "#1a1a2e" : "#e8e8f0",
-            colorTextSecondary: isLight ? "#666688" : "#7777aa",
-            colorPrimary: "#6c63ff",
+            colorInputText: isLight ? "#1a1a2e" : "var(--pf-text)",
+            colorText: isLight ? "#1a1a2e" : "var(--pf-text)",
+            colorTextSecondary: isLight ? "#666688" : "var(--pf-muted)",
+            colorPrimary: "var(--pf-accent)",
             colorDanger: "#ff4d4d",
             borderRadius: "10px",
             fontFamily: "var(--font-space-grotesk), system-ui, sans-serif",
@@ -43,17 +43,17 @@ export default function RegisterPage() {
             card: `w-full shadow-lg rounded-2xl border transition-colors duration-300 ${
               isLight
                 ? "bg-white border-[rgba(0,0,0,0.08)] shadow-[0_8px_40px_rgba(0,0,0,0.08)]"
-                : "bg-[#13131e] border-[rgba(108,99,255,0.15)] shadow-[0_8px_40px_rgba(0,0,0,0.3)]"
+                : "bg-[var(--pf-surface)] border-[var(--pf-accent-soft)] shadow-[0_8px_40px_rgba(0,0,0,0.3)]"
             }`,
             formButtonPrimary:
-              "bg-[#6c63ff] hover:bg-[#5a53e0] text-white font-semibold shadow-[0_0_16px_rgba(108,99,255,0.3)]",
+              "bg-[var(--pf-accent)] hover:bg-[var(--pf-accent-hover)] text-white font-semibold shadow-[0_0_16px_var(--pf-border-hover)]",
             socialButtonsBlockButton: isLight
               ? "border-[rgba(0,0,0,0.1)] bg-[#f5f5f7] text-[#1a1a2e] hover:bg-[#ebebf0]"
-              : "border-[rgba(108,99,255,0.2)] bg-[#1a1a2e] text-[#e8e8f0] hover:bg-[rgba(108,99,255,0.1)]",
-            footerActionLink: "text-[#6c63ff] hover:text-[#8b84ff]",
+              : "border-[var(--pf-border-light)] bg-[#1a1a2e] text-[var(--pf-text)] hover:bg-[var(--pf-border-dim)]",
+            footerActionLink: "text-[var(--pf-accent)] hover:text-[var(--pf-accent-text)]",
             formFieldInput: isLight
-              ? "bg-[#f5f5f7] border-[rgba(0,0,0,0.1)] text-[#1a1a2e] focus:border-[#6c63ff]"
-              : "bg-[#1a1a2e] border-[rgba(108,99,255,0.2)] text-[#e8e8f0] focus:border-[#6c63ff]",
+              ? "bg-[#f5f5f7] border-[rgba(0,0,0,0.1)] text-[#1a1a2e] focus:border-[var(--pf-accent)]"
+              : "bg-[#1a1a2e] border-[var(--pf-border-light)] text-[var(--pf-text)] focus:border-[var(--pf-accent)]",
           },
         }}
       />

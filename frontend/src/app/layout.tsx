@@ -33,6 +33,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       signUpUrl="/register"
     >
       <html lang="en" suppressHydrationWarning>
+        <head>
+          <script dangerouslySetInnerHTML={{ __html: `try{var t=localStorage.getItem('portify-theme')||'dark';var r=t==='system'?(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'):t;document.documentElement.classList.toggle('dark',r==='dark')}catch(e){document.documentElement.classList.add('dark')}` }} />
+        </head>
         <body
           className={`${geistSans.variable} ${geistMono.variable} ${spaceGrotesk.variable} antialiased`}
         >

@@ -41,13 +41,13 @@ export default function StepShell({
     >
       {/* Progress bar */}
       <div className="space-y-2">
-        <div className="flex items-center justify-between text-xs text-[#7777aa]">
+        <div className="flex items-center justify-between text-xs text-[var(--pf-muted)]">
           <span>Step {step} of {total}</span>
           <span>{Math.round(progress)}% complete</span>
         </div>
-        <div className="h-1 w-full overflow-hidden rounded-full bg-[rgba(108,99,255,0.1)]">
+        <div className="h-1 w-full overflow-hidden rounded-full bg-[var(--pf-border-dim)]">
           <motion.div
-            className="h-full rounded-full bg-gradient-to-r from-[#6c63ff] to-[#00d4ff]"
+            className="h-full rounded-full bg-gradient-to-r from-[var(--pf-accent)] to-[#00d4ff]"
             initial={false}
             animate={{ width: `${progress}%` }}
             transition={{ duration: 0.4, ease: "easeOut" }}
@@ -58,10 +58,10 @@ export default function StepShell({
       {/* Question */}
       <div>
         {emoji && <div className="mb-3 text-3xl">{emoji}</div>}
-        <h2 className="text-2xl font-bold leading-snug text-[#e8e8f0] sm:text-3xl">
+        <h2 className="text-2xl font-bold leading-snug text-[var(--pf-text)] sm:text-3xl">
           {question}
         </h2>
-        {hint && <p className="mt-2 text-[#7777aa]">{hint}</p>}
+        {hint && <p className="mt-2 text-[var(--pf-muted)]">{hint}</p>}
       </div>
 
       {/* Input area */}
@@ -72,7 +72,7 @@ export default function StepShell({
         {onBack && (
           <button
             onClick={onBack}
-            className="rounded-xl border border-[rgba(108,99,255,0.2)] px-5 py-2.5 text-sm text-[#7777aa] hover:border-[rgba(108,99,255,0.5)] hover:text-[#e8e8f0] transition-colors"
+            className="rounded-xl border border-[var(--pf-border-light)] px-5 py-2.5 text-sm text-[var(--pf-muted)] hover:border-[rgba(108,99,255,0.5)] hover:text-[var(--pf-text)] transition-colors"
           >
             ← Back
           </button>
@@ -80,7 +80,7 @@ export default function StepShell({
         <button
           onClick={onNext}
           disabled={nextDisabled || loading}
-          className="flex items-center gap-2 rounded-xl bg-[#6c63ff] px-6 py-2.5 text-sm font-semibold text-white shadow-[0_0_20px_rgba(108,99,255,0.25)] transition-all hover:bg-[#5a53e0] hover:shadow-[0_0_28px_rgba(108,99,255,0.4)] disabled:opacity-50"
+          className="flex items-center gap-2 rounded-xl bg-[var(--pf-accent)] px-6 py-2.5 text-sm font-semibold text-white shadow-[0_0_20px_var(--pf-border-medium)] transition-all hover:bg-[var(--pf-accent-hover)] hover:shadow-[0_0_28px_var(--pf-border-hover)] disabled:opacity-50"
         >
           {loading ? (
             <>

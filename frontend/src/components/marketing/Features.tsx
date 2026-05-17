@@ -8,7 +8,7 @@ const FEATURES = [
     icon: Brain,
     title: "Claude AI-powered copy",
     desc: "Anthropic's Claude reads your experience and writes headlines, summaries, and bullet points that actually sound like you.",
-    color: "#6c63ff",
+    color: "var(--pf-accent)",
   },
   {
     icon: Zap,
@@ -38,7 +38,7 @@ const FEATURES = [
     icon: RefreshCw,
     title: "Always up to date",
     desc: "Update your resume anytime and regenerate. Your URL stays the same — share it once, forever.",
-    color: "#6c63ff",
+    color: "var(--pf-accent)",
   },
   {
     icon: Download,

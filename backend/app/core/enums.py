@@ -24,6 +24,7 @@ class TemplateID(str, Enum):
     AURORA = "aurora"
     MINIMAL = "minimal"
     CYBER = "cyber"
+    EXECUTIVE = "executive"
 
 
 class ResumeStatus(str, Enum):

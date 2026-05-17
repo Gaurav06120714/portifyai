@@ -93,7 +93,7 @@ export async function deleteResume(id: string, token: string): Promise<void> {
 
 export async function generatePortfolio(
   resumeId: string,
-  templateId: "aurora" | "minimal" | "cyber",
+  templateId: "aurora" | "minimal" | "cyber" | "executive",
   token: string,
 ): Promise<GeneratePortfolioResponse> {
   return request<GeneratePortfolioResponse>("/portfolio/generate", {
@@ -144,6 +144,24 @@ export async function buildResume(
   return request<UploadResumeResponse>("/resume/build", {
     method: "POST",
     body: JSON.stringify(data),
+    token,
+  });
+}
+
+export async function generateCoverLetter(
+  payload: {
+    name: string;
+    title: string;
+    company: string;
+    role: string;
+    highlights: string;
+    tone: string;
+  },
+  token: string,
+): Promise<{ cover_letter: string }> {
+  return request<{ cover_letter: string }>("/resume/cover-letter", {
+    method: "POST",
+    body: JSON.stringify(payload),
     token,
   });
 }

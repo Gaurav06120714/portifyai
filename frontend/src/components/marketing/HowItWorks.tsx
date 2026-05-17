@@ -11,7 +11,7 @@ const STEPS = [
     icon: Upload,
     title: "Add your experience",
     body: "Upload a PDF resume or fill out our 12-question AI Resume Builder. Takes less than 5 minutes — we handle the rest.",
-    color: "#6c63ff",
+    color: "var(--pf-accent)",
     glow: "rgba(108,99,255,0.35)",
   },
   {

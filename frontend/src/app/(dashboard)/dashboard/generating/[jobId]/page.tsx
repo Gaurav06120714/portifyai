@@ -73,7 +73,7 @@ export default function GeneratingPage({ params }: Props) {
       {/* Background pulse */}
       <div className="pointer-events-none fixed inset-0 overflow-hidden">
         <motion.div
-          className="absolute left-1/2 top-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#6c63ff]"
+          className="absolute left-1/2 top-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[var(--pf-accent)]"
           animate={{ scale: [1, 1.15, 1], opacity: [0.04, 0.07, 0.04] }}
           transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
         />
@@ -88,7 +88,7 @@ export default function GeneratingPage({ params }: Props) {
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.7, opacity: 0 }}
             transition={{ duration: 0.3, ease: "easeOut" }}
-            className="mx-auto flex h-20 w-20 items-center justify-center rounded-2xl bg-[rgba(108,99,255,0.15)]"
+            className="mx-auto flex h-20 w-20 items-center justify-center rounded-2xl bg-[var(--pf-accent-soft)]"
           >
             {error ? (
               <AlertCircle className="h-9 w-9 text-red-400" />
@@ -98,13 +98,13 @@ export default function GeneratingPage({ params }: Props) {
                 animate={{ scale: 1 }}
                 transition={{ type: "spring", stiffness: 260, damping: 20 }}
               >
-                <Rocket className="h-9 w-9 text-[#6c63ff]" />
+                <Rocket className="h-9 w-9 text-[var(--pf-accent)]" />
               </motion.div>
             ) : (
               <motion.div
                 animate={{ rotate: phase === "building" ? [0, 5, -5, 0] : 0 }}
                 transition={{ duration: 1.5, repeat: Infinity }}
-                className="text-[#6c63ff]"
+                className="text-[var(--pf-accent)]"
               >
                 {STEPS[Math.min(currentIdx, 3)]?.icon}
               </motion.div>
@@ -124,25 +124,25 @@ export default function GeneratingPage({ params }: Props) {
             {error ? (
               <>
                 <h1 className="text-2xl font-bold text-red-400">Generation Failed</h1>
-                <p className="mt-2 text-[#7777aa]">{error}</p>
+                <p className="mt-2 text-[var(--pf-muted)]">{error}</p>
                 <button
                   onClick={() => router.push("/dashboard/upload")}
-                  className="mt-6 rounded-xl bg-[#6c63ff] px-6 py-2.5 text-sm font-semibold text-white hover:bg-[#5a53e0] transition-colors"
+                  className="mt-6 rounded-xl bg-[var(--pf-accent)] px-6 py-2.5 text-sm font-semibold text-white hover:bg-[var(--pf-accent-hover)] transition-colors"
                 >
                   Try again
                 </button>
               </>
             ) : phase === "done" ? (
               <>
-                <h1 className="text-2xl font-bold text-[#e8e8f0]">Your portfolio is ready!</h1>
-                <p className="mt-2 text-[#7777aa]">Redirecting you now…</p>
+                <h1 className="text-2xl font-bold text-[var(--pf-text)]">Your portfolio is ready!</h1>
+                <p className="mt-2 text-[var(--pf-muted)]">Redirecting you now…</p>
               </>
             ) : (
               <>
-                <h1 className="text-2xl font-bold text-[#e8e8f0]">
+                <h1 className="text-2xl font-bold text-[var(--pf-text)]">
                   {STEPS[Math.min(currentIdx, 3)]?.label}
                 </h1>
-                <p className="mt-2 text-[#7777aa]">
+                <p className="mt-2 text-[var(--pf-muted)]">
                   {STEPS[Math.min(currentIdx, 3)]?.sublabel}
                 </p>
               </>
@@ -164,20 +164,20 @@ export default function GeneratingPage({ params }: Props) {
                   transition={{ delay: idx * 0.07, duration: 0.3 }}
                   className={`flex items-center gap-3 rounded-xl border px-4 py-3 text-left transition-colors ${
                     isActive
-                      ? "border-[#6c63ff] bg-[rgba(108,99,255,0.1)]"
+                      ? "border-[var(--pf-accent)] bg-[var(--pf-border-dim)]"
                       : isDone
                         ? "border-[rgba(34,197,94,0.25)] bg-[rgba(34,197,94,0.05)]"
-                        : "border-[rgba(108,99,255,0.1)] bg-[#13131e] opacity-40"
+                        : "border-[var(--pf-border-dim)] bg-[var(--pf-surface)] opacity-40"
                   }`}
                 >
                   {/* Icon */}
                   <div
                     className={`flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg ${
                       isActive
-                        ? "bg-[rgba(108,99,255,0.2)] text-[#6c63ff]"
+                        ? "bg-[var(--pf-border-light)] text-[var(--pf-accent)]"
                         : isDone
                           ? "bg-[rgba(34,197,94,0.15)] text-green-400"
-                          : "bg-[rgba(108,99,255,0.08)] text-[#7777aa]"
+                          : "bg-[var(--pf-border-subtle)] text-[var(--pf-muted)]"
                     }`}
                   >
                     {isDone ? (
@@ -198,10 +198,10 @@ export default function GeneratingPage({ params }: Props) {
                     <p
                       className={`text-sm font-semibold ${
                         isActive
-                          ? "text-[#e8e8f0]"
+                          ? "text-[var(--pf-text)]"
                           : isDone
                             ? "text-green-400"
-                            : "text-[#7777aa]"
+                            : "text-[var(--pf-muted)]"
                       }`}
                     >
                       {step.label}
@@ -210,7 +210,7 @@ export default function GeneratingPage({ params }: Props) {
                       <motion.p
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
-                        className="text-xs text-[#7777aa] mt-0.5"
+                        className="text-xs text-[var(--pf-muted)] mt-0.5"
                       >
                         {step.sublabel}
                       </motion.p>
@@ -222,7 +222,7 @@ export default function GeneratingPage({ params }: Props) {
                     <motion.div
                       animate={{ rotate: 360 }}
                       transition={{ duration: 1.2, repeat: Infinity, ease: "linear" }}
-                      className="h-4 w-4 rounded-full border-2 border-[#6c63ff] border-t-transparent flex-shrink-0"
+                      className="h-4 w-4 rounded-full border-2 border-[var(--pf-accent)] border-t-transparent flex-shrink-0"
                     />
                   )}
                 </motion.div>
@@ -233,9 +233,9 @@ export default function GeneratingPage({ params }: Props) {
 
         {/* Progress bar */}
         {!error && phase !== "done" && (
-          <div className="h-1 w-full overflow-hidden rounded-full bg-[rgba(108,99,255,0.1)]">
+          <div className="h-1 w-full overflow-hidden rounded-full bg-[var(--pf-border-dim)]">
             <motion.div
-              className="h-full rounded-full bg-gradient-to-r from-[#6c63ff] to-[#00d4ff]"
+              className="h-full rounded-full bg-gradient-to-r from-[var(--pf-accent)] to-[#00d4ff]"
               initial={{ width: "5%" }}
               animate={{
                 width: `${Math.max(5, ((currentIdx + 1) / STEPS.length) * 100)}%`,
@@ -245,7 +245,7 @@ export default function GeneratingPage({ params }: Props) {
           </div>
         )}
 
-        <p className="text-xs text-[#7777aa]">Job ID: {jobId}</p>
+        <p className="text-xs text-[var(--pf-muted)]">Job ID: {jobId}</p>
       </div>
     </div>
   );

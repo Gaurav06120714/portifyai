@@ -106,8 +106,6 @@ describe("UploadZone", () => {
       resume_id: "test-resume-123",
       filename: "my_resume.pdf",
       message: "Upload successful",
-      status: "done",
-      parsed_data: null,
     });
 
     render(<UploadZone />);
@@ -131,8 +129,6 @@ describe("UploadZone", () => {
       resume_id: "cb-resume-456",
       filename: "resume.pdf",
       message: "Done",
-      status: "done",
-      parsed_data: null,
     });
 
     render(<UploadZone onSuccess={onSuccess} />);
@@ -212,8 +208,6 @@ describe("UploadZone", () => {
       resume_id: "done-123",
       filename: "done.pdf",
       message: "Done",
-      status: "done",
-      parsed_data: null,
     });
 
     render(<UploadZone />);

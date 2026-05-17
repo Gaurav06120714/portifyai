@@ -86,7 +86,7 @@ export default function PortfolioPreviewPage({ params }: Props) {
   if (loading) {
     return (
       <div className="flex h-full items-center justify-center">
-        <Loader2 className="h-6 w-6 animate-spin text-[#6c63ff]" />
+        <Loader2 className="h-6 w-6 animate-spin text-[var(--pf-accent)]" />
       </div>
     );
   }
@@ -100,34 +100,34 @@ export default function PortfolioPreviewPage({ params }: Props) {
         initial={{ opacity: 0, y: -8 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.2 }}
-        className="flex items-center gap-3 border-b border-[rgba(108,99,255,0.15)] bg-[#0d0d14] px-4 py-3 flex-shrink-0"
+        className="flex items-center gap-3 border-b border-[var(--pf-accent-soft)] bg-[var(--pf-bg)] px-4 py-3 flex-shrink-0"
       >
         {/* Back */}
         <button
           onClick={() => router.push("/dashboard/portfolios")}
-          className="flex items-center gap-1.5 rounded-lg px-2 py-1.5 text-sm text-[#7777aa] hover:text-[#e8e8f0] transition-colors"
+          className="flex items-center gap-1.5 rounded-lg px-2 py-1.5 text-sm text-[var(--pf-muted)] hover:text-[var(--pf-text)] transition-colors"
         >
           <ArrowLeft className="h-4 w-4" />
           Back
         </button>
 
-        <div className="h-4 w-px bg-[rgba(108,99,255,0.15)]" />
+        <div className="h-4 w-px bg-[var(--pf-accent-soft)]" />
 
         {/* Slug / title */}
-        <span className="flex-1 truncate text-sm font-medium text-[#e8e8f0]">
+        <span className="flex-1 truncate text-sm font-medium text-[var(--pf-text)]">
           {portfolio.slug || id}
         </span>
 
         {/* Viewport toggle */}
-        <div className="flex items-center rounded-lg border border-[rgba(108,99,255,0.15)] bg-[#13131e] p-0.5">
+        <div className="flex items-center rounded-lg border border-[var(--pf-accent-soft)] bg-[var(--pf-surface)] p-0.5">
           {(["desktop", "mobile"] as ViewMode[]).map((m) => (
             <button
               key={m}
               onClick={() => setViewMode(m)}
               className={`flex h-7 w-8 items-center justify-center rounded-md transition-colors ${
                 viewMode === m
-                  ? "bg-[rgba(108,99,255,0.2)] text-[#8b84ff]"
-                  : "text-[#7777aa] hover:text-[#e8e8f0]"
+                  ? "bg-[var(--pf-border-light)] text-[var(--pf-accent-text)]"
+                  : "text-[var(--pf-muted)] hover:text-[var(--pf-text)]"
               }`}
             >
               {m === "desktop" ? (
@@ -142,7 +142,7 @@ export default function PortfolioPreviewPage({ params }: Props) {
         {/* Refresh */}
         <button
           onClick={fetchPortfolio}
-          className="flex h-8 w-8 items-center justify-center rounded-lg text-[#7777aa] hover:bg-[rgba(108,99,255,0.08)] hover:text-[#e8e8f0] transition-colors"
+          className="flex h-8 w-8 items-center justify-center rounded-lg text-[var(--pf-muted)] hover:bg-[var(--pf-border-subtle)] hover:text-[var(--pf-text)] transition-colors"
           title="Refresh"
         >
           <RefreshCw className="h-4 w-4" />
@@ -152,7 +152,7 @@ export default function PortfolioPreviewPage({ params }: Props) {
         <button
           onClick={handleCopy}
           disabled={!publicUrl}
-          className="flex items-center gap-1.5 rounded-lg border border-[rgba(108,99,255,0.2)] px-3 py-1.5 text-sm text-[#7777aa] hover:border-[rgba(108,99,255,0.5)] hover:text-[#e8e8f0] transition-colors disabled:opacity-40"
+          className="flex items-center gap-1.5 rounded-lg border border-[var(--pf-border-light)] px-3 py-1.5 text-sm text-[var(--pf-muted)] hover:border-[rgba(108,99,255,0.5)] hover:text-[var(--pf-text)] transition-colors disabled:opacity-40"
         >
           <Copy className="h-3.5 w-3.5" />
           {copied ? "Copied!" : "Copy link"}
@@ -164,7 +164,7 @@ export default function PortfolioPreviewPage({ params }: Props) {
             href={portfolio.html_url}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-1.5 rounded-lg border border-[rgba(108,99,255,0.2)] px-3 py-1.5 text-sm text-[#7777aa] hover:border-[rgba(108,99,255,0.5)] hover:text-[#e8e8f0] transition-colors"
+            className="flex items-center gap-1.5 rounded-lg border border-[var(--pf-border-light)] px-3 py-1.5 text-sm text-[var(--pf-muted)] hover:border-[rgba(108,99,255,0.5)] hover:text-[var(--pf-text)] transition-colors"
           >
             <ExternalLink className="h-3.5 w-3.5" />
             Open
@@ -178,7 +178,7 @@ export default function PortfolioPreviewPage({ params }: Props) {
           className={`flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-sm font-semibold transition-colors disabled:opacity-50 ${
             portfolio.is_public
               ? "bg-[rgba(34,197,94,0.12)] text-green-400 hover:bg-[rgba(34,197,94,0.2)]"
-              : "bg-[#6c63ff] text-white hover:bg-[#5a53e0]"
+              : "bg-[var(--pf-accent)] text-white hover:bg-[var(--pf-accent-hover)]"
           }`}
         >
           {publishing ? (
@@ -200,7 +200,7 @@ export default function PortfolioPreviewPage({ params }: Props) {
             initial={{ opacity: 0, scale: 0.98 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.2 }}
-            className={`relative overflow-hidden rounded-xl border border-[rgba(108,99,255,0.15)] shadow-2xl transition-all ${
+            className={`relative overflow-hidden rounded-xl border border-[var(--pf-accent-soft)] shadow-2xl transition-all ${
               viewMode === "mobile" ? "w-[390px]" : "w-full max-w-6xl"
             }`}
             style={{ height: viewMode === "mobile" ? "844px" : "calc(100vh - 140px)" }}
@@ -214,8 +214,8 @@ export default function PortfolioPreviewPage({ params }: Props) {
           </motion.div>
         ) : (
           <div className="flex flex-col items-center gap-3 text-center">
-            <Loader2 className="h-6 w-6 animate-spin text-[#6c63ff]" />
-            <p className="text-sm text-[#7777aa]">
+            <Loader2 className="h-6 w-6 animate-spin text-[var(--pf-accent)]" />
+            <p className="text-sm text-[var(--pf-muted)]">
               {portfolio.status === "generating"
                 ? "Portfolio is still generating…"
                 : "No preview available yet."}

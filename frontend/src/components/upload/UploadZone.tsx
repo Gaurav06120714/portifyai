@@ -88,20 +88,20 @@ export default function UploadZone({ onSuccess }: Props) {
 
   if (stage === "done" && result) {
     return (
-      <div className="flex flex-col items-center gap-4 rounded-xl border border-[rgba(108,99,255,0.2)] bg-[#13131e] p-10 text-center">
+      <div className="flex flex-col items-center gap-4 rounded-xl border border-[var(--pf-border-light)] bg-[var(--pf-surface)] p-10 text-center">
         <div className="flex h-16 w-16 items-center justify-center rounded-full bg-[rgba(0,212,80,0.12)]">
           <CheckCircle className="h-8 w-8 text-green-400" />
         </div>
         <div>
-          <p className="text-lg font-semibold text-[#e8e8f0]">Upload complete</p>
-          <p className="mt-1 text-sm text-[#7777aa]">{result.filename}</p>
+          <p className="text-lg font-semibold text-[var(--pf-text)]">Upload complete</p>
+          <p className="mt-1 text-sm text-[var(--pf-muted)]">{result.filename}</p>
         </div>
-        <p className="text-sm text-[#7777aa]">
-          Resume ID: <span className="font-mono text-[#e8e8f0]">{result.resume_id}</span>
+        <p className="text-sm text-[var(--pf-muted)]">
+          Resume ID: <span className="font-mono text-[var(--pf-text)]">{result.resume_id}</span>
         </p>
         <button
           onClick={reset}
-          className="mt-2 rounded-lg border border-[rgba(108,99,255,0.2)] px-4 py-2 text-sm text-[#7777aa] hover:border-[rgba(108,99,255,0.5)] hover:text-[#e8e8f0] transition-colors"
+          className="mt-2 rounded-lg border border-[var(--pf-border-light)] px-4 py-2 text-sm text-[var(--pf-muted)] hover:border-[rgba(108,99,255,0.5)] hover:text-[var(--pf-text)] transition-colors"
         >
           Upload another
         </button>
@@ -117,25 +117,25 @@ export default function UploadZone({ onSuccess }: Props) {
           isDragReject
             ? "border-red-500 bg-[rgba(255,77,77,0.05)]"
             : isDragActive
-              ? "border-[#6c63ff] bg-[rgba(108,99,255,0.08)]"
+              ? "border-[var(--pf-accent)] bg-[var(--pf-border-subtle)]"
               : stage === "error"
                 ? "border-red-500/40 bg-[rgba(255,77,77,0.03)]"
-                : "border-[rgba(108,99,255,0.2)] bg-[#13131e] hover:border-[rgba(108,99,255,0.45)] hover:bg-[rgba(108,99,255,0.04)]"
+                : "border-[var(--pf-border-light)] bg-[var(--pf-surface)] hover:border-[rgba(108,99,255,0.45)] hover:bg-[rgba(108,99,255,0.04)]"
         }`}
       >
         <input {...getInputProps()} />
 
         {stage === "uploading" ? (
           <>
-            <Loader2 className="h-10 w-10 animate-spin text-[#6c63ff]" />
+            <Loader2 className="h-10 w-10 animate-spin text-[var(--pf-accent)]" />
             <div className="w-full max-w-xs space-y-2">
-              <div className="flex justify-between text-sm text-[#7777aa]">
+              <div className="flex justify-between text-sm text-[var(--pf-muted)]">
                 <span className="truncate max-w-[200px]">{file?.name}</span>
                 <span>{progress}%</span>
               </div>
-              <div className="h-1.5 w-full overflow-hidden rounded-full bg-[rgba(108,99,255,0.15)]">
+              <div className="h-1.5 w-full overflow-hidden rounded-full bg-[var(--pf-accent-soft)]">
                 <div
-                  className="h-full rounded-full bg-[#6c63ff] transition-all duration-300"
+                  className="h-full rounded-full bg-[var(--pf-accent)] transition-all duration-300"
                   style={{ width: `${progress}%` }}
                 />
               </div>
@@ -148,7 +148,7 @@ export default function UploadZone({ onSuccess }: Props) {
             </div>
             <div>
               <p className="font-semibold text-red-400">Upload failed</p>
-              <p className="mt-1 text-sm text-[#7777aa]">
+              <p className="mt-1 text-sm text-[var(--pf-muted)]">
                 {typeof errorMsg === "string" ? errorMsg : "Upload failed. Please try again."}
               </p>
             </div>
@@ -157,32 +157,32 @@ export default function UploadZone({ onSuccess }: Props) {
                 e.stopPropagation();
                 reset();
               }}
-              className="rounded-lg border border-[rgba(108,99,255,0.2)] px-4 py-2 text-sm text-[#7777aa] hover:text-[#e8e8f0] transition-colors"
+              className="rounded-lg border border-[var(--pf-border-light)] px-4 py-2 text-sm text-[var(--pf-muted)] hover:text-[var(--pf-text)] transition-colors"
             >
               Try again
             </button>
           </>
         ) : (
           <>
-            <div className="flex h-14 w-14 items-center justify-center rounded-full bg-[rgba(108,99,255,0.1)]">
+            <div className="flex h-14 w-14 items-center justify-center rounded-full bg-[var(--pf-border-dim)]">
               {isDragActive ? (
-                <FileText className="h-7 w-7 text-[#6c63ff]" />
+                <FileText className="h-7 w-7 text-[var(--pf-accent)]" />
               ) : (
-                <Upload className="h-7 w-7 text-[#6c63ff]" />
+                <Upload className="h-7 w-7 text-[var(--pf-accent)]" />
               )}
             </div>
             <div>
-              <p className="text-base font-semibold text-[#e8e8f0]">
+              <p className="text-base font-semibold text-[var(--pf-text)]">
                 {isDragActive ? "Drop it here" : "Drag & drop your resume"}
               </p>
-              <p className="mt-1 text-sm text-[#7777aa]">
+              <p className="mt-1 text-sm text-[var(--pf-muted)]">
                 or{" "}
-                <span className="text-[#6c63ff] underline-offset-2 hover:underline">
+                <span className="text-[var(--pf-accent)] underline-offset-2 hover:underline">
                   browse files
                 </span>
               </p>
             </div>
-            <p className="text-xs text-[#7777aa]">PDF or DOCX · max 10 MB</p>
+            <p className="text-xs text-[var(--pf-muted)]">PDF or DOCX · max 10 MB</p>
           </>
         )}
       </div>

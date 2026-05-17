@@ -2,12 +2,13 @@
 
 Endpoints
 ---------
-POST   /api/v1/resume/upload       Upload PDF/DOCX, store in S3, create DB record
-POST   /api/v1/resume/build        Build resume from form data via Claude
-POST   /api/v1/resume/suggest-skills  AI skill suggestions for a partial profile
-GET    /api/v1/resume/             List current user's resumes (with presigned URLs)
-GET    /api/v1/resume/{id}/url     Generate a fresh presigned URL for a specific resume
-DELETE /api/v1/resume/{id}         Delete from S3 + DB
+POST   /api/v1/resume/upload         Upload PDF/DOCX, store in S3, create DB record
+POST   /api/v1/resume/build          Build resume from form data via Claude
+POST   /api/v1/resume/suggest-skills AI skill suggestions for a partial profile
+POST   /api/v1/resume/cover-letter   Generate a tailored cover letter via Claude
+GET    /api/v1/resume/               List current user's resumes (with presigned URLs)
+GET    /api/v1/resume/{id}/url       Generate a fresh presigned URL for a specific resume
+DELETE /api/v1/resume/{id}           Delete from S3 + DB
 
 All endpoints require:
     Authorization: Bearer <access_token>
@@ -91,6 +92,19 @@ class SuggestSkillsRequest(BaseModel):
 
 class SuggestSkillsResponse(BaseModel):
     suggestions: list[str]
+
+
+class CoverLetterRequest(BaseModel):
+    name: str = ""
+    title: str = ""
+    company: str = ""
+    role: str = ""
+    highlights: str = ""  # key achievements / selling points
+    tone: str = "professional"  # professional | enthusiastic | concise
+
+
+class CoverLetterResponse(BaseModel):
+    cover_letter: str
 
 
 # ── POST /build ────────────────────────────────────────────────────────────────
@@ -193,6 +207,60 @@ async def suggest_skills(
     except Exception as exc:
         logger.warning("Skill suggestion failed: %s", exc)
         return SuggestSkillsResponse(suggestions=[])
+
+
+# ── POST /cover-letter ─────────────────────────────────────────────────────────
+
+@router.post(
+    "/cover-letter",
+    response_model=CoverLetterResponse,
+    status_code=status.HTTP_200_OK,
+    summary="Generate a tailored cover letter using Claude AI",
+)
+@limiter.limit("10/minute")
+async def generate_cover_letter(
+    request: Request,
+    payload: CoverLetterRequest,
+    current_user: CurrentUser,
+) -> CoverLetterResponse:
+    from app.services.resume_parser import sanitize_for_ai
+
+    safe_name = sanitize_for_ai(payload.name[:100], source="name")
+    safe_title = sanitize_for_ai(payload.title[:100], source="title")
+    safe_company = sanitize_for_ai(payload.company[:150], source="company")
+    safe_role = sanitize_for_ai(payload.role[:150], source="role")
+    safe_highlights = sanitize_for_ai(payload.highlights[:800], source="highlights")
+    tone_map = {"professional": "professional and polished", "enthusiastic": "enthusiastic and energetic", "concise": "concise and direct"}
+    tone_desc = tone_map.get(payload.tone, "professional and polished")
+
+    prompt = (
+        f"Write a {tone_desc} cover letter for {safe_name}, a {safe_title}, "
+        f"applying for the {safe_role} position at {safe_company}.\n\n"
+        f"Key highlights to weave in:\n{safe_highlights}\n\n"
+        f"Requirements:\n"
+        f"- 3-4 paragraphs\n"
+        f"- Opening that immediately grabs attention\n"
+        f"- Middle paragraphs demonstrating fit with specific achievements\n"
+        f"- Strong closing with a clear call to action\n"
+        f"- No filler phrases like 'I am writing to express my interest'\n"
+        f"- Output only the cover letter text, no subject line or date headers"
+    )
+
+    try:
+        client = anthropic.Anthropic(api_key=settings.ANTHROPIC_API_KEY)
+        response = client.messages.create(
+            model="claude-3-5-haiku-latest",
+            max_tokens=1024,
+            messages=[{"role": "user", "content": prompt}],
+        )
+        letter = response.content[0].text.strip()
+        return CoverLetterResponse(cover_letter=letter)
+    except Exception as exc:
+        logger.warning("Cover letter generation failed: %s", exc)
+        raise HTTPException(
+            status_code=status.HTTP_502_BAD_GATEWAY,
+            detail="Cover letter generation failed. Please try again.",
+        )
 
 
 # ── Helpers ────────────────────────────────────────────────────────────────────

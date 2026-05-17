@@ -4,7 +4,7 @@ import PageTransition from "@/components/PageTransition";
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex h-dvh bg-[#0d0d14]">
+    <div className="flex h-dvh bg-[var(--pf-bg)]">
       <div className="hidden lg:flex lg:flex-shrink-0">
         <Sidebar />
       </div>

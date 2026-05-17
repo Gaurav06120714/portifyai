@@ -13,8 +13,8 @@ export default function SettingsPage() {
   return (
     <div className="max-w-2xl mx-auto space-y-8">
       <div>
-        <h1 className="text-2xl font-bold text-[#e8e8f0]">Settings</h1>
-        <p className="mt-1 text-[#7777aa]">Manage your account and preferences.</p>
+        <h1 className="text-2xl font-bold text-[var(--pf-text)]">Settings</h1>
+        <p className="mt-1 text-[var(--pf-muted)]">Manage your account and preferences.</p>
       </div>
 
       {/* Profile section */}
@@ -28,20 +28,20 @@ export default function SettingsPage() {
               className="h-14 w-14 rounded-full object-cover"
             />
           ) : (
-            <div className="flex h-14 w-14 items-center justify-center rounded-full bg-[rgba(108,99,255,0.2)]">
-              <User className="h-6 w-6 text-[#6c63ff]" />
+            <div className="flex h-14 w-14 items-center justify-center rounded-full bg-[var(--pf-border-light)]">
+              <User className="h-6 w-6 text-[var(--pf-accent)]" />
             </div>
           )}
           <div>
-            <p className="font-semibold text-[#e8e8f0]">
+            <p className="font-semibold text-[var(--pf-text)]">
               {user?.fullName ?? user?.username ?? "—"}
             </p>
-            <p className="text-sm text-[#7777aa]">
+            <p className="text-sm text-[var(--pf-muted)]">
               {user?.primaryEmailAddress?.emailAddress}
             </p>
           </div>
         </div>
-        <p className="mt-4 text-sm text-[#7777aa]">
+        <p className="mt-4 text-sm text-[var(--pf-muted)]">
           Profile details are managed through your Clerk account. To update your name
           or avatar, click the user button in the sidebar.
         </p>
@@ -51,17 +51,17 @@ export default function SettingsPage() {
       <Section title="Plan &amp; Billing">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <CreditCard className="h-5 w-5 text-[#7777aa]" />
+            <CreditCard className="h-5 w-5 text-[var(--pf-muted)]" />
             <div>
-              <p className="font-semibold capitalize text-[#e8e8f0]">{plan} Plan</p>
-              <p className="text-sm text-[#7777aa]">
+              <p className="font-semibold capitalize text-[var(--pf-text)]">{plan} Plan</p>
+              <p className="text-sm text-[var(--pf-muted)]">
                 {plan === "pro" ? "$9/month · All features unlocked" : "Free forever · 3 portfolios"}
               </p>
             </div>
           </div>
           <Link
             href="/dashboard/settings/billing"
-            className="flex items-center gap-1.5 rounded-lg border border-[rgba(108,99,255,0.2)] px-3 py-2 text-sm text-[#7777aa] hover:border-[rgba(108,99,255,0.5)] hover:text-[#e8e8f0] transition-colors"
+            className="flex items-center gap-1.5 rounded-lg border border-[var(--pf-border-light)] px-3 py-2 text-sm text-[var(--pf-muted)] hover:border-[rgba(108,99,255,0.5)] hover:text-[var(--pf-text)] transition-colors"
           >
             {plan === "pro" ? "Manage" : "Upgrade"}
             <ArrowRight className="h-3.5 w-3.5" />
@@ -95,8 +95,8 @@ export default function SettingsPage() {
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <div className="rounded-xl border border-[rgba(108,99,255,0.15)] bg-[#13131e] p-5 space-y-4">
-      <h2 className="text-xs font-semibold uppercase tracking-wider text-[#7777aa]">{title}</h2>
+    <div className="rounded-xl border border-[var(--pf-accent-soft)] bg-[var(--pf-surface)] p-5 space-y-4">
+      <h2 className="text-xs font-semibold uppercase tracking-wider text-[var(--pf-muted)]">{title}</h2>
       {children}
     </div>
   );
@@ -118,12 +118,12 @@ function DangerAction({
   danger?: boolean;
 }) {
   return (
-    <div className="flex items-center justify-between gap-4 rounded-lg border border-[rgba(108,99,255,0.1)] bg-[#0d0d14] p-4">
+    <div className="flex items-center justify-between gap-4 rounded-lg border border-[var(--pf-border-dim)] bg-[var(--pf-bg)] p-4">
       <div className="flex items-start gap-3">
-        <div className={`mt-0.5 ${danger ? "text-red-400" : "text-[#7777aa]"}`}>{icon}</div>
+        <div className={`mt-0.5 ${danger ? "text-red-400" : "text-[var(--pf-muted)]"}`}>{icon}</div>
         <div>
-          <p className="text-sm font-medium text-[#e8e8f0]">{label}</p>
-          <p className="text-xs text-[#7777aa]">{description}</p>
+          <p className="text-sm font-medium text-[var(--pf-text)]">{label}</p>
+          <p className="text-xs text-[var(--pf-muted)]">{description}</p>
         </div>
       </div>
       <button
@@ -131,7 +131,7 @@ function DangerAction({
         className={`flex-shrink-0 rounded-lg border px-3 py-1.5 text-sm font-medium transition-colors ${
           danger
             ? "border-red-500/30 text-red-400 hover:bg-red-500/10"
-            : "border-[rgba(108,99,255,0.2)] text-[#7777aa] hover:text-[#e8e8f0]"
+            : "border-[var(--pf-border-light)] text-[var(--pf-muted)] hover:text-[var(--pf-text)]"
         }`}
       >
         {buttonLabel}
