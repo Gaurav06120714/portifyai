@@ -1,19 +1,46 @@
-# PortifyAI — AI Portfolio Generator
+<div align="center">
 
-> Turn your resume into a stunning, hosted portfolio in under 60 seconds — powered by Claude AI.
+# ⚡ PortifyAI
 
-[![CI/CD](https://github.com/Gaurav06120714/portifyai/actions/workflows/deploy.yml/badge.svg)](https://github.com/Gaurav06120714/portifyai/actions)
+### Turn your resume into a stunning, hosted portfolio in under 60 seconds.
+
+[![Next.js](https://img.shields.io/badge/Next.js_15-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
+[![Claude AI](https://img.shields.io/badge/Claude_AI-D97706?style=for-the-badge&logo=anthropic&logoColor=white)](https://anthropic.com/)
+[![Clerk](https://img.shields.io/badge/Clerk_Auth-6C47FF?style=for-the-badge&logo=clerk&logoColor=white)](https://clerk.dev/)
+[![Stripe](https://img.shields.io/badge/Stripe-635BFF?style=for-the-badge&logo=stripe&logoColor=white)](https://stripe.com/)
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![CI](https://github.com/Gaurav06120714/portifyai/actions/workflows/test.yml/badge.svg)](https://github.com/Gaurav06120714/portifyai/actions)
+
+</div>
 
 ---
 
-## ✨ Features
+## ✨ What It Does
 
-- **AI Resume Builder** — 12-step guided form; Claude writes polished bullet points and a professional summary
-- **3 Premium Templates** — Aurora, Minimal, Cyber — swap at any time
-- **Instant Hosting** — Every portfolio gets a public URL (`portifyai.com/portfolio/your-name`)
-- **Free / Pro Plans** — Free: 3 portfolios, 1 template. Pro ($9/mo): unlimited + AI skill suggestions + custom domain
-- **Light / Dark / System** theme across the entire UI
-- **Clerk Auth** — Google, GitHub, email — passwordless
+PortifyAI uses Claude AI to transform your resume (or a quick form) into a beautiful, public portfolio website — hosted instantly, no code required.
+
+| Feature | Free | Pro ($9/mo) |
+|---|:---:|:---:|
+| AI Resume Builder (12-step guided) | ✅ | ✅ |
+| Portfolio templates | 1 | All 4 |
+| Portfolios | 3 | Unlimited |
+| AI skill suggestions | ❌ | ✅ |
+| AI cover letter generator | ❌ | ✅ |
+| Custom domain | ❌ | ✅ |
+| Public URL (`/portfolio/your-name`) | ✅ | ✅ |
+
+---
+
+## 🎨 Templates
+
+| Template | Style | Best For |
+|---|---|---|
+| **Aurora** | Dark electric, animated gradient | Developers & Designers |
+| **Minimal** | Clean white, typography-first | PMs & Researchers |
+| **Cyber** | Neon glassmorphism, terminal feel | Anyone who refuses to blend in |
+| **Executive** | Two-column serif, gold accents | Senior Engineers & Managers |
 
 ---
 
@@ -21,47 +48,75 @@
 
 ```
 portifyai/
-├── frontend/          # Next.js 15 App Router (TypeScript)
-│   ├── src/app/       # Pages (route groups: marketing, dashboard, auth)
-│   ├── src/components/
-│   ├── src/context/   # ThemeContext, PlanContext
-│   └── src/lib/       # api.ts, posthog.ts, sentry.ts
-├── backend/           # FastAPI + SQLAlchemy + Celery
+├── frontend/                    # Next.js 15 · TypeScript · Tailwind CSS
+│   ├── src/
+│   │   ├── app/
+│   │   │   ├── (marketing)/     # Landing page, pricing
+│   │   │   ├── (dashboard)/     # All /dashboard/* pages
+│   │   │   │   └── dashboard/
+│   │   │   │       ├── page.tsx              # Overview
+│   │   │   │       ├── build-resume/         # AI Resume Builder
+│   │   │   │       ├── upload/               # PDF/DOCX upload
+│   │   │   │       ├── portfolios/           # My Portfolios
+│   │   │   │       ├── templates/            # Template picker
+│   │   │   │       ├── cover-letter/         # AI Cover Letter
+│   │   │   │       └── settings/             # Account + Billing
+│   │   │   └── (auth)/          # Login, Register (Clerk)
+│   │   ├── components/
+│   │   │   ├── dashboard/       # Sidebar, MobileHeader
+│   │   │   └── ui/              # Shared UI primitives
+│   │   ├── context/             # ThemeContext, PlanContext
+│   │   ├── hooks/               # Custom React hooks
+│   │   ├── lib/                 # api.ts, posthog.ts, sentry.ts
+│   │   └── types/               # Shared TypeScript types
+│   ├── e2e/                     # Playwright end-to-end tests
+│   └── src/test/                # Vitest unit tests
+│
+├── backend/                     # FastAPI · SQLAlchemy · Celery
 │   ├── app/
-│   │   ├── routers/   # auth, resume, portfolio, billing
-│   │   ├── services/  # resume_parser, resume_builder, portfolio_generator
-│   │   ├── models/    # User, Resume, Portfolio, AIJob
-│   │   └── core/      # config, limiter, cache, sentry
-│   └── alembic/       # DB migrations
-└── .github/workflows/ # CI/CD pipeline
+│   │   ├── routers/             # auth, resume, portfolio, billing
+│   │   ├── services/            # resume_parser, resume_builder, portfolio_generator
+│   │   ├── models/              # User, Resume, Portfolio, AIJob (SQLAlchemy)
+│   │   ├── schemas/             # Pydantic request/response models
+│   │   ├── core/                # config, rate limiter, cache, sentry
+│   │   ├── templates/           # Jinja2 HTML (aurora, minimal, cyber, executive)
+│   │   └── workers/             # Celery tasks
+│   ├── alembic/                 # Database migrations
+│   ├── tests/                   # Pytest test suite
+│   ├── Dockerfile               # API server image
+│   └── Dockerfile.worker        # Celery worker image
+│
+├── .github/workflows/           # CI/CD pipeline (GitHub Actions)
+├── docker-compose.yml           # Local full-stack dev environment
+└── README.md
 ```
 
 ---
 
-## 🚀 Local Setup
+## 🚀 Local Development
 
 ### Prerequisites
 
-- Node.js 20+
-- Python 3.12+
-- PostgreSQL 16
-- Redis 7
+- **Node.js** 20+
+- **Python** 3.12+
+- **PostgreSQL** 16
+- **Redis** 7
 
-### 1. Clone & install
+### 1. Clone
 
 ```bash
 git clone https://github.com/Gaurav06120714/portifyai.git
 cd portifyai
-
-# Frontend
-cd frontend && npm install
-
-# Backend
-cd ../backend && python -m venv .venv && source .venv/bin/activate
-pip install -e ".[dev]"
 ```
 
-### 2. Environment variables
+### 2. Frontend
+
+```bash
+cd frontend
+npm install
+cp .env.example .env.local   # fill in values below
+npm run dev                  # → http://localhost:3000
+```
 
 **`frontend/.env.local`**
 ```env
@@ -74,9 +129,24 @@ NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=/dashboard
 NEXT_PUBLIC_API_URL=http://localhost:8000/api/v1
 NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_test_...
 NEXT_PUBLIC_SITE_URL=http://localhost:3000
+
 # Optional
 NEXT_PUBLIC_POSTHOG_KEY=phc_...
 NEXT_PUBLIC_SENTRY_DSN=https://...@sentry.io/...
+```
+
+### 3. Backend
+
+```bash
+cd backend
+python -m venv .venv && source .venv/bin/activate
+pip install -e ".[dev]"
+cp .env.example .env          # fill in values below
+
+createdb portifyai
+alembic upgrade head
+
+uvicorn app.main:app --reload --port 8000   # → http://localhost:8000
 ```
 
 **`backend/.env`**
@@ -90,131 +160,129 @@ CLERK_JWKS_URL=https://<your-clerk-domain>/.well-known/jwks.json
 REDIS_URL=redis://localhost:6379/0
 SECRET_KEY=change-me-32-chars-minimum
 FRONTEND_URL=http://localhost:3000
+
 # Optional
 SENTRY_DSN=https://...@sentry.io/...
-# Storage (skip for local dev — upload feature disabled without S3)
 AWS_ACCESS_KEY_ID=
 AWS_SECRET_ACCESS_KEY=
 AWS_S3_BUCKET=
 AWS_REGION=us-east-1
 ```
 
-### 3. Database
+### 4. Docker (alternative — runs everything at once)
 
 ```bash
-createdb portifyai
-cd backend && alembic upgrade head
+docker compose up --build
 ```
-
-### 4. Run
-
-```bash
-# Terminal 1 — Backend
-cd backend && uvicorn app.main:app --reload --port 8000
-
-# Terminal 2 — Frontend
-cd frontend && npm run dev
-```
-
-Open [http://localhost:3000](http://localhost:3000)
 
 ---
 
-## 🌐 Production Deployment
+## 🔑 API Reference
+
+Base URL: `http://localhost:8000/api/v1`  
+Interactive docs: [`/api/v1/docs`](http://localhost:8000/api/v1/docs)
+
+```
+# Resume
+POST   /resume/build            AI-powered resume builder     (10 req/min)
+POST   /resume/suggest-skills   AI skill suggestions          (10 req/min)
+POST   /resume/cover-letter     AI cover letter generator     (10 req/min)
+POST   /resume/upload           Upload PDF / DOCX
+GET    /resume/                 List user resumes
+
+# Portfolio
+POST   /portfolio/generate      Generate portfolio from resume (10 req/min)
+GET    /portfolio/{id}/status   Poll generation status
+GET    /portfolio/p/{slug}      Public portfolio (cached 1h)
+PUT    /portfolio/{id}/publish  Toggle public / private
+DELETE /portfolio/{id}          Delete portfolio
+GET    /portfolio/sitemap       All public slugs
+
+# Billing
+POST   /billing/create-checkout  Stripe checkout session
+GET    /billing/status           Subscription status
+GET    /billing/portal           Customer billing portal URL
+
+# Auth
+GET    /auth/me                  Current user profile
+
+# Health
+GET    /health                   Liveness probe
+```
+
+---
+
+## 🌐 Deployment
 
 ### Frontend → Vercel
 
-1. Import the `frontend/` folder on [vercel.com](https://vercel.com)
-2. Add all `NEXT_PUBLIC_*` env vars in the Vercel dashboard
-3. Every push to `main` auto-deploys via GitHub Actions
+1. Import the `frontend/` directory at [vercel.com/new](https://vercel.com/new)
+2. Add all `NEXT_PUBLIC_*` environment variables in the Vercel dashboard
+3. Every push to `main` auto-deploys
 
 ### Backend → Railway
 
-1. Create a new Railway project, add a Postgres + Redis service
-2. Set all backend env vars in Railway Variables
-3. Railway reads `backend/railway.toml` and builds from `backend/Dockerfile`
+1. Create a Railway project, attach a **Postgres** and **Redis** service
+2. Set all backend environment variables in Railway
+3. Railway auto-reads `backend/railway.toml` and builds from `backend/Dockerfile`
 
-### GitHub Actions Secrets
-
-Add these in **Settings → Secrets → Actions**:
+### Required GitHub Secrets (Settings → Secrets → Actions)
 
 | Secret | Description |
-|--------|-------------|
+|---|---|
 | `RAILWAY_TOKEN` | Railway API token |
 | `VERCEL_TOKEN` | Vercel API token |
 | `VERCEL_ORG_ID` | Vercel org ID |
 | `VERCEL_PROJECT_ID` | Vercel project ID |
-| `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` | Clerk pub key (for CI build) |
+| `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` | Clerk publishable key (used in CI build) |
 | `NEXT_PUBLIC_API_URL` | Production API URL |
-| `NEXT_PUBLIC_POSTHOG_KEY` | PostHog (optional) |
-| `NEXT_PUBLIC_SENTRY_DSN` | Sentry (optional) |
-
----
-
-## 🔑 API Overview
-
-```
-POST   /api/v1/resume/build           Build resume from form (rate: 10/min)
-POST   /api/v1/resume/suggest-skills  AI skill suggestions (rate: 10/min)
-POST   /api/v1/resume/upload          Upload PDF/DOCX
-GET    /api/v1/resume/                List resumes
-
-POST   /api/v1/portfolio/generate     Generate portfolio (rate: 10/min)
-GET    /api/v1/portfolio/{id}/status  Poll generation status
-GET    /api/v1/portfolio/p/{slug}     Public portfolio (cached 1hr)
-PUT    /api/v1/portfolio/{id}/publish Toggle publish
-GET    /api/v1/portfolio/sitemap      Public slugs for sitemap.xml
-
-POST   /api/v1/billing/create-checkout  Stripe checkout session
-GET    /api/v1/billing/status           Subscription status
-GET    /api/v1/billing/portal           Customer portal URL
-
-GET    /health                          Liveness probe
-```
-
-Swagger UI (dev only): [http://localhost:8000/api/v1/docs](http://localhost:8000/api/v1/docs)
-
----
-
-## 🛡 Production Hardening
-
-- **Rate limiting** — SlowAPI: 10 req/min on all AI endpoints
-- **Redis caching** — Public portfolios cached 1hr, sitemap 24hr
-- **Security headers** — HSTS, CSP, X-Frame-Options, Permissions-Policy
-- **Image optimization** — Uploads compressed to WebP via Pillow before S3
-- **Sentry** — Error tracking on both frontend and backend
-- **PostHog** — User analytics with Clerk auto-identification
-- **Clerk JWKS** — RS256 JWT verification, auto-create users on first API call
-
----
-
-## 🎥 60-Second Demo Script
-
-> Record with Loom or QuickTime. Narrate each step as you go.
-
-| Time | Action |
-|------|--------|
-| 0–5s | Open portifyai.com — show hero + "Generate free" CTA |
-| 5–15s | Sign up with Google (Clerk modal) → land on Dashboard |
-| 15–25s | Click "AI Resume Builder" → fill Name, Years, 1 job, 1 project |
-| 25–35s | Skip to step 12 "What roles are you targeting?" → click Build |
-| 35–45s | Watch generating screen with live status update |
-| 45–55s | Portfolio appears — scroll through sections, show public URL |
-| 55–60s | Open pricing → show Pro plan → end on "Start free" CTA |
-
-**Hook line:** *"I built my entire portfolio in 45 seconds — here's how."*
+| `NEXT_PUBLIC_POSTHOG_KEY` | PostHog key *(optional)* |
+| `NEXT_PUBLIC_SENTRY_DSN` | Sentry DSN *(optional)* |
 
 ---
 
 ## 🧪 Testing
 
 ```bash
-# Backend
-cd backend && pytest -x -q
+# Backend — pytest
+cd backend
+pytest -x -q
 
-# Frontend lint + types
-cd frontend && npx next lint && npx tsc --noEmit
+# Frontend — Vitest unit tests
+cd frontend
+npm test
+
+# Frontend — type check + lint
+npx tsc --noEmit
+npx next lint
+
+# Frontend — Playwright e2e
+npx playwright test
 ```
+
+---
+
+## 🛡 Security & Performance
+
+- **Rate limiting** — SlowAPI: 10 req/min on all AI endpoints
+- **Redis caching** — Public portfolios cached 1h, sitemap 24h
+- **Security headers** — HSTS, CSP, X-Frame-Options, Permissions-Policy
+- **JWT auth** — Clerk RS256 JWKS verification, auto-create users on first call
+- **Image optimization** — Uploads compressed to WebP via Pillow before S3
+- **Error tracking** — Sentry on both frontend and backend
+- **Analytics** — PostHog with Clerk auto-identification
+- **Anti-flash** — localStorage theme applied before React hydrates (no white flash)
+
+---
+
+## 🎨 Theme System
+
+PortifyAI ships with a full **Light / Dark / System** theme:
+
+- CSS custom properties (`--pf-*`) defined for both modes in `globals.css`
+- `ThemeContext` applies the `dark` class to `<html>` and persists to `localStorage`
+- Anti-flash inline script in `layout.tsx` resolves theme before first paint
+- Smooth 200ms transitions across all color properties
 
 ---
 
