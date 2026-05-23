@@ -181,7 +181,7 @@ export default function DashboardPage() {
         className="rounded-xl border border-[var(--pf-border-dim)] bg-[var(--pf-surface)] p-5"
       >
         <p className="mb-4 text-xs font-semibold uppercase tracking-wider text-[var(--pf-muted)]">
-          How PortifyAI works
+          How VyroPortify works
         </p>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
           {[

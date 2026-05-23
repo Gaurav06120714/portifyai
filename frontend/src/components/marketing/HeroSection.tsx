@@ -128,7 +128,7 @@ export default function HeroSection() {
                 <div className="h-3 w-3 rounded-full bg-green-500/70" />
               </div>
               <div className="mx-auto flex h-6 w-64 items-center justify-center rounded-md bg-background px-3 text-[10px] text-muted-foreground">
-                portifyai.com/portfolio/alex-johnson
+                vyroportify.com/portfolio/alex-johnson
               </div>
             </div>
 

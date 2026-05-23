@@ -38,7 +38,7 @@ export default function MobileHeader() {
           <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[var(--pf-accent)]">
             <Zap className="h-4 w-4 text-white" />
           </div>
-          <span className="text-lg font-bold text-[var(--pf-text)]">PortifyAI</span>
+          <span className="text-lg font-bold text-[var(--pf-text)]">VyroPortify</span>
         </Link>
         <div className="flex items-center gap-3">
           <UserButton />
@@ -64,7 +64,7 @@ export default function MobileHeader() {
                 <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[var(--pf-accent)]">
                   <Zap className="h-4 w-4 text-white" />
                 </div>
-                <span className="font-bold text-[var(--pf-text)]">PortifyAI</span>
+                <span className="font-bold text-[var(--pf-text)]">VyroPortify</span>
               </div>
               <button
                 onClick={() => setOpen(false)}

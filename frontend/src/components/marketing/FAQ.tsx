@@ -11,7 +11,7 @@ const FAQS = [
   },
   {
     q: "Do I need to know how to code or design?",
-    a: "Not at all. PortifyAI is built for people who want a stunning portfolio without touching HTML or Figma. Everything — layout, typography, color, responsiveness — is handled for you.",
+    a: "Not at all. VyroPortify is built for people who want a stunning portfolio without touching HTML or Figma. Everything — layout, typography, color, responsiveness — is handled for you.",
   },
   {
     q: "Can I edit the content after it's generated?",
@@ -19,7 +19,7 @@ const FAQS = [
   },
   {
     q: "What's included in the free plan?",
-    a: "The free plan gives you one portfolio with all three templates, a portifyai.com/[slug] URL, and PDF export. It's genuinely useful — not a crippled demo. Upgrade to Pro for custom domains, analytics, and unlimited portfolios.",
+    a: "The free plan gives you one portfolio with all three templates, a vyroportify.com/[slug] URL, and PDF export. It's genuinely useful — not a crippled demo. Upgrade to Pro for custom domains, analytics, and unlimited portfolios.",
   },
   {
     q: "Can I use my own domain name?",

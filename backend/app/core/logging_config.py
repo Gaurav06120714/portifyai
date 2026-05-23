@@ -1,4 +1,4 @@
-"""Structured logging configuration for PortifyAI.
+"""Structured logging configuration for VyroPortify.
 
 In production (ENVIRONMENT=production):
   - Emits JSON lines with timestamp, level, correlation_id, event, etc.

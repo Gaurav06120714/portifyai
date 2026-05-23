@@ -16,10 +16,10 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: "PortifyAI — AI Portfolio Generator",
+  title: "VyroPortify — AI Portfolio Generator",
   description: "Transform your resume into a beautiful portfolio in under 60 seconds.",
   openGraph: {
-    title: "PortifyAI — AI Portfolio Generator",
+    title: "VyroPortify — AI Portfolio Generator",
     description: "Transform your resume into a beautiful portfolio in under 60 seconds.",
     type: "website",
   },

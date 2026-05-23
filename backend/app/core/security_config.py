@@ -1,4 +1,4 @@
-"""Centralized security configuration for PortifyAI.
+"""Centralized security configuration for VyroPortify.
 
 All security-relevant constants and constraints live here so they can be:
   1. Loaded from environment variables (production-grade, 12-factor).

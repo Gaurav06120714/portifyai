@@ -10,7 +10,7 @@ const PRO_PERKS = [
   "AI skill suggestions",
   "Custom domain support",
   "Priority generation queue",
-  "Remove PortifyAI branding",
+  "Remove VyroPortify branding",
 ];
 
 interface Props {
@@ -68,7 +68,7 @@ export default function ProGateModal({ open, onClose, featureName }: Props) {
                 <h2 className="text-xl font-bold text-[var(--pf-text)]">
                   {featureName
                     ? `"${featureName}" is a Pro feature`
-                    : "Upgrade to PortifyAI Pro"}
+                    : "Upgrade to VyroPortify Pro"}
                 </h2>
                 <p className="mt-1.5 text-sm text-[var(--pf-muted)]">
                   Get unlimited portfolios, all templates, and AI-powered features for{" "}

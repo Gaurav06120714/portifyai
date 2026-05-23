@@ -8,7 +8,7 @@ import FAQ from "@/components/marketing/FAQ";
 import FinalCTA from "@/components/marketing/FinalCTA";
 
 export const metadata = {
-  title: "PortifyAI — Turn your resume into a portfolio in 60 seconds",
+  title: "VyroPortify — Turn your resume into a portfolio in 60 seconds",
   description:
     "Upload a PDF or answer 12 questions. Claude AI writes your copy and renders a pixel-perfect portfolio — live in under 60 seconds. Free to start.",
 };

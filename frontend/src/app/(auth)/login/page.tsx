@@ -19,7 +19,7 @@ export default function LoginPage() {
           className="mt-1 text-sm transition-colors duration-300"
           style={{ color: isLight ? "#666688" : "var(--pf-muted)" }}
         >
-          Sign in to your PortifyAI account
+          Sign in to your VyroPortify account
         </p>
       </div>
       <SignIn

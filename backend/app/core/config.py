@@ -16,13 +16,13 @@ class Settings(BaseSettings):
     )
 
     # ── App ───────────────────────────────────────────────────────────────
-    APP_NAME: str = "PortifyAI"
+    APP_NAME: str = "VyroPortify"
     API_V1_PREFIX: str = "/api/v1"
     ENVIRONMENT: str = "development"  # development | staging | production
     DEBUG: bool = True
 
     # ── Database ──────────────────────────────────────────────────────────
-    DATABASE_URL: str = "postgresql+asyncpg://user:password@localhost:5432/portifyai"
+    DATABASE_URL: str = "postgresql+asyncpg://user:password@localhost:5432/vyroportify"
     DB_POOL_SIZE: int = 5
     DB_MAX_OVERFLOW: int = 10
     DB_ECHO_SQL: bool = False  # set True to log all SQL
@@ -159,7 +159,7 @@ def validate_production_config() -> None:
 
     # 3. DATABASE_URL — the default value points to localhost which won't work
     #    in any containerised or cloud environment.
-    _DEFAULT_DB = "postgresql+asyncpg://user:password@localhost:5432/portifyai"
+    _DEFAULT_DB = "postgresql+asyncpg://user:password@localhost:5432/vyroportify"
     if not settings.DATABASE_URL or settings.DATABASE_URL == _DEFAULT_DB:
         msg = "DATABASE_URL is missing or still the default dev value"
         if settings.is_production:

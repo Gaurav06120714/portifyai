@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 
-const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://portifyai.com";
+const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://vyroportify.com";
 const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000/api/v1";
 
 interface PortfolioData {
@@ -47,7 +47,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const ogTitle = `${name} — ${title}`;
   const ogDesc = summary
     ? summary.slice(0, 160)
-    : `View ${name}'s AI-generated portfolio. Built with PortifyAI.`;
+    : `View ${name}'s AI-generated portfolio. Built with VyroPortify.`;
 
   return {
     title: `${name} · Portfolio`,
@@ -57,7 +57,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: ogDesc,
       url: `${BASE_URL}/portfolio/${slug}`,
       type: "profile",
-      siteName: "PortifyAI",
+      siteName: "VyroPortify",
       images: avatarUrl
         ? [{ url: avatarUrl, width: 400, height: 400, alt: name }]
         : [
@@ -65,7 +65,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
               url: `${BASE_URL}/og-default.png`,
               width: 1200,
               height: 630,
-              alt: "PortifyAI — AI Portfolio Generator",
+              alt: "VyroPortify — AI Portfolio Generator",
             },
           ],
     },

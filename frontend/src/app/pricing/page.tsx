@@ -17,7 +17,7 @@ const FREE_FEATURES = [
   "3 portfolios",
   "Aurora template only",
   "Standard generation queue",
-  "PortifyAI branding",
+  "VyroPortify branding",
   "Public portfolio URL",
 ];
 
@@ -26,7 +26,7 @@ const PRO_FEATURES = [
   "All 3 premium templates",
   "AI skill suggestions",
   "Priority generation queue",
-  "Remove PortifyAI branding",
+  "Remove VyroPortify branding",
   "Custom domain support",
   "Early access to new features",
 ];

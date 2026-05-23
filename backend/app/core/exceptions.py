@@ -1,4 +1,4 @@
-"""Domain exceptions for PortifyAI.
+"""Domain exceptions for VyroPortify.
 
 All business-logic errors should raise one of these rather than FastAPI's
 HTTPException directly. A global handler in main.py converts them to

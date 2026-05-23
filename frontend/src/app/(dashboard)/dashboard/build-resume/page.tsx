@@ -674,7 +674,7 @@ function ProjectStep({
             <input
               autoFocus
               className="w-full rounded-xl border border-[var(--pf-border-light)] bg-[var(--pf-surface)] px-4 py-3 text-[var(--pf-text)] placeholder-[var(--pf-muted)] outline-none transition-colors focus:border-[var(--pf-accent)] text-base"
-              placeholder="e.g. PortifyAI"
+              placeholder="e.g. VyroPortify"
               value={data.name}
               onChange={(e) => onChangeField(index, "name", e.target.value)}
             />

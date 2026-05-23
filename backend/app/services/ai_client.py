@@ -45,7 +45,7 @@ def call_ai(
         "Authorization": f"Bearer {settings.OPENROUTER_API_KEY}",
         "Content-Type": "application/json",
         "HTTP-Referer": settings.FRONTEND_URL,
-        "X-Title": "PortifyAI",
+        "X-Title": "VyroPortify",
     }
 
     payload = {

@@ -1,6 +1,6 @@
 <div align="center">
 
-# ⚡ PortifyAI
+# ⚡ VyroPortify
 
 ### Turn your resume into a stunning, hosted portfolio in under 60 seconds.
 
@@ -11,7 +11,7 @@
 [![Stripe](https://img.shields.io/badge/Stripe-635BFF?style=for-the-badge&logo=stripe&logoColor=white)](https://stripe.com/)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![CI](https://github.com/Gaurav06120714/portifyai/actions/workflows/test.yml/badge.svg)](https://github.com/Gaurav06120714/portifyai/actions)
+[![CI](https://github.com/Gaurav06120714/vyroportify/actions/workflows/test.yml/badge.svg)](https://github.com/Gaurav06120714/vyroportify/actions)
 
 </div>
 
@@ -19,7 +19,7 @@
 
 ## ✨ What It Does
 
-PortifyAI uses Claude AI to transform your resume (or a quick form) into a beautiful, public portfolio website — hosted instantly, no code required.
+VyroPortify uses Claude AI to transform your resume (or a quick form) into a beautiful, public portfolio website — hosted instantly, no code required.
 
 | Feature | Free | Pro ($9/mo) |
 |---|:---:|:---:|
@@ -47,7 +47,7 @@ PortifyAI uses Claude AI to transform your resume (or a quick form) into a beaut
 ## 🗂 Project Structure
 
 ```
-portifyai/
+vyroportify/
 ├── frontend/                    # Next.js 15 · TypeScript · Tailwind CSS
 │   ├── src/
 │   │   ├── app/
@@ -105,8 +105,8 @@ portifyai/
 ### 1. Clone
 
 ```bash
-git clone https://github.com/Gaurav06120714/portifyai.git
-cd portifyai
+git clone https://github.com/Gaurav06120714/vyroportify.git
+cd vyroportify
 ```
 
 ### 2. Frontend
@@ -143,7 +143,7 @@ python -m venv .venv && source .venv/bin/activate
 pip install -e ".[dev]"
 cp .env.example .env          # fill in values below
 
-createdb portifyai
+createdb vyroportify
 alembic upgrade head
 
 uvicorn app.main:app --reload --port 8000   # → http://localhost:8000
@@ -151,7 +151,7 @@ uvicorn app.main:app --reload --port 8000   # → http://localhost:8000
 
 **`backend/.env`**
 ```env
-DATABASE_URL=postgresql+asyncpg://user:pass@localhost:5432/portifyai
+DATABASE_URL=postgresql+asyncpg://user:pass@localhost:5432/vyroportify
 ANTHROPIC_API_KEY=sk-ant-...
 STRIPE_SECRET_KEY=sk_test_...
 STRIPE_PRO_PRICE_ID=price_...
@@ -277,7 +277,7 @@ npx playwright test
 
 ## 🎨 Theme System
 
-PortifyAI ships with a full **Light / Dark / System** theme:
+VyroPortify ships with a full **Light / Dark / System** theme:
 
 - CSS custom properties (`--pf-*`) defined for both modes in `globals.css`
 - `ThemeContext` applies the `dark` class to `<html>` and persists to `localStorage`

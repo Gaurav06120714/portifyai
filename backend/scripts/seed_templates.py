@@ -23,7 +23,7 @@ DEFAULT_TEMPLATES: list[dict[str, Any]] = [
     {
         "id": "minimal",
         "name": "Minimal",
-        "preview_url": "https://cdn.portifyai.com/previews/minimal.png",
+        "preview_url": "https://cdn.vyroportify.com/previews/minimal.png",
         "category": "personal",
         "is_pro": False,
         "config": {
@@ -56,7 +56,7 @@ DEFAULT_TEMPLATES: list[dict[str, Any]] = [
     {
         "id": "modern",
         "name": "Modern",
-        "preview_url": "https://cdn.portifyai.com/previews/modern.png",
+        "preview_url": "https://cdn.vyroportify.com/previews/modern.png",
         "category": "developer",
         "is_pro": False,
         "config": {
@@ -89,7 +89,7 @@ DEFAULT_TEMPLATES: list[dict[str, Any]] = [
     {
         "id": "bold",
         "name": "Bold",
-        "preview_url": "https://cdn.portifyai.com/previews/bold.png",
+        "preview_url": "https://cdn.vyroportify.com/previews/bold.png",
         "category": "designer",
         "is_pro": True,
         "config": {

@@ -20,7 +20,7 @@ const PLANS = [
     perks: [
       "1 portfolio",
       "3 template choices",
-      "portifyai.com/[slug] URL",
+      "vyroportify.com/[slug] URL",
       "PDF export",
       "Community support",
     ],

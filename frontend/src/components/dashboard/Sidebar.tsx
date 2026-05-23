@@ -132,7 +132,7 @@ export default function Sidebar() {
         <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg bg-[var(--pf-accent)]">
           <Zap className="h-4 w-4 text-white" />
         </div>
-        <span className="text-lg font-bold text-[var(--pf-text)]">PortifyAI</span>
+        <span className="text-lg font-bold text-[var(--pf-text)]">VyroPortify</span>
       </Link>
 
       {/* Nav */}

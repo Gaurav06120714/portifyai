@@ -19,7 +19,7 @@ const FEATURES = [
   {
     icon: Globe,
     title: "Custom domain",
-    desc: "Connect your own domain or use your free portifyai.com/[slug] URL. SSL included automatically.",
+    desc: "Connect your own domain or use your free vyroportify.com/[slug] URL. SSL included automatically.",
     color: "#ff6b9d",
   },
   {

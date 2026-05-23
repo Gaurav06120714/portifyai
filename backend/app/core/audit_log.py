@@ -1,4 +1,4 @@
-"""Structured security audit logging for PortifyAI.
+"""Structured security audit logging for VyroPortify.
 
 Usage:
     from app.core.audit_log import log_security_event
@@ -16,7 +16,7 @@ Design principles:
      Loki, etc. without custom parsers.
   3. Fire-and-forget — log_security_event() never raises. A logging failure must
      not break the business flow that triggered it.
-  4. Separate logger name ("portifyai.security") so security events can be
+  4. Separate logger name ("vyroportify.security") so security events can be
      routed to a dedicated sink (e.g., a SIEM) via logging config.
 
 Event types (expand as needed):
@@ -39,8 +39,8 @@ import time
 from typing import Any
 
 # Dedicated logger — route this to a SIEM or separate log file in production.
-# Example loguru/logging config: route "portifyai.security" to security.log.
-_security_logger = logging.getLogger("portifyai.security")
+# Example loguru/logging config: route "vyroportify.security" to security.log.
+_security_logger = logging.getLogger("vyroportify.security")
 
 # Ensure the security logger always has at least one handler so events are
 # not silently dropped if the root logger has no handlers configured.

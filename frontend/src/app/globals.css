@@ -27,7 +27,7 @@
 :root {
   --radius: 0.75rem;
 
-  /* ── PortifyAI Dashboard palette — LIGHT ─────────────────────────────── */
+  /* ── VyroPortify Dashboard palette — LIGHT ─────────────────────────────── */
   --pf-bg: #f4f4ff;
   --pf-surface: #ffffff;
   --pf-surface2: #eeeeff;
@@ -73,7 +73,7 @@
 }
 
 .dark {
-  /* ── PortifyAI Dashboard palette — DARK ──────────────────────────────── */
+  /* ── VyroPortify Dashboard palette — DARK ──────────────────────────────── */
   --pf-bg: #0d0d14;
   --pf-surface: #13131e;
   --pf-surface2: #16161f;

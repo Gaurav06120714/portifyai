@@ -394,10 +394,10 @@ async def upload_resume(
                 detail="File storage service unavailable. Please try again.",
             )
     else:
-        # Local fallback — store in /tmp/portifyai_uploads/ with unique name
+        # Local fallback — store in /tmp/vyroportify_uploads/ with unique name
         import os
         import uuid as _uuid
-        upload_dir = "/tmp/portifyai_uploads"
+        upload_dir = "/tmp/vyroportify_uploads"
         os.makedirs(upload_dir, exist_ok=True)
         unique_id = str(_uuid.uuid4())[:8]
         safe_name = f"{current_user.id}_{unique_id}_{original_filename}"

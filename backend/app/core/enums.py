@@ -1,4 +1,4 @@
-"""Centralised enums for PortifyAI.
+"""Centralised enums for VyroPortify.
 
 All status/plan/template string constants must live here.
 Import these everywhere raw strings like "pending", "free", "aurora" were used.

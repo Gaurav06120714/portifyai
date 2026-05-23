@@ -1,4 +1,4 @@
-"""PortifyAI FastAPI application entry point.
+"""VyroPortify FastAPI application entry point.
 
 Start the server:
     uvicorn app.main:app --reload --port 8000

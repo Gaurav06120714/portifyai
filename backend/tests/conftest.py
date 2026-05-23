@@ -1,4 +1,4 @@
-"""Shared pytest fixtures for PortifyAI backend tests.
+"""Shared pytest fixtures for VyroPortify backend tests.
 
 Strategy:
 - Use SQLite in-memory (via aiosqlite) — no real Postgres needed.
