@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "concurrently \"npm run dev --prefix frontend\" \"npm run dev:backend\"",
+    "dev:vyro": "concurrently \"npm run dev --prefix frontend\" \"npm run dev:backend\" && sleep 4 && node open-in-vyro.mjs http://localhost:3000",
     "dev:backend": "cd backend && uvicorn app.main:app --reload --port 8000",
     "build": "npm run build --prefix frontend",
     "lint": "npm run lint --prefix frontend && cd backend && ruff check . && black --check . && isort --check ."
