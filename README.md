@@ -126,7 +126,7 @@ cd vyroportify
 cd frontend
 npm install
 cp .env.example .env.local   # fill in values below
-npm run dev                  # → http://localhost:3000
+npm run dev                  # → http://localhost:3007
 ```
 
 **Windows**
@@ -134,7 +134,7 @@ npm run dev                  # → http://localhost:3000
 cd frontend
 npm install
 copy .env.example .env.local   # fill in values below
-npm run dev                    # → http://localhost:3000
+npm run dev                    # → http://localhost:3007
 ```
 
 **`frontend/.env.local`**
@@ -145,9 +145,9 @@ NEXT_PUBLIC_CLERK_SIGN_IN_URL=/login
 NEXT_PUBLIC_CLERK_SIGN_UP_URL=/register
 NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL=/dashboard
 NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=/dashboard
-NEXT_PUBLIC_API_URL=http://localhost:8000/api/v1
+NEXT_PUBLIC_API_URL=http://localhost:8001/api/v1
 NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_test_...
-NEXT_PUBLIC_SITE_URL=http://localhost:3000
+NEXT_PUBLIC_SITE_URL=http://localhost:3007
 
 # Optional
 NEXT_PUBLIC_POSTHOG_KEY=phc_...
@@ -166,7 +166,7 @@ cp .env.example .env          # fill in values below
 createdb vyroportify
 alembic upgrade head
 
-uvicorn app.main:app --reload --port 8000   # → http://localhost:8000
+uvicorn app.main:app --reload --port 8001   # → http://localhost:8001
 ```
 
 **Windows**
@@ -180,7 +180,7 @@ copy .env.example .env        # fill in values below
 createdb vyroportify
 alembic upgrade head
 
-uvicorn app.main:app --reload --port 8000   # → http://localhost:8000
+uvicorn app.main:app --reload --port 8001   # → http://localhost:8001
 ```
 
 **`backend/.env`**
@@ -193,7 +193,7 @@ STRIPE_WEBHOOK_SECRET=whsec_...
 CLERK_JWKS_URL=https://<your-clerk-domain>/.well-known/jwks.json
 REDIS_URL=redis://localhost:6379/0
 SECRET_KEY=change-me-32-chars-minimum
-FRONTEND_URL=http://localhost:3000
+FRONTEND_URL=http://localhost:3007
 
 # Optional
 SENTRY_DSN=https://...@sentry.io/...
@@ -235,8 +235,8 @@ docker compose up --build
 
 ## 🔑 API Reference
 
-Base URL: `http://localhost:8000/api/v1`  
-Interactive docs: [`/api/v1/docs`](http://localhost:8000/api/v1/docs)
+Base URL: `http://localhost:8001/api/v1`  
+Interactive docs: [`/api/v1/docs`](http://localhost:8001/api/v1/docs)
 
 ```
 # Resume
