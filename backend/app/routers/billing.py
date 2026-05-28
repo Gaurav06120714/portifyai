@@ -10,15 +10,18 @@ GET    /api/v1/billing/status            Current user's plan + subscription deta
 
 import logging
 from datetime import UTC, datetime
+from typing import Annotated
 
 import anyio
 import stripe
-from fastapi import APIRouter, Header, HTTPException, Request, status
+from fastapi import APIRouter, Depends, Header, HTTPException, Request, status
 from pydantic import BaseModel
 from sqlalchemy import select
 
 from app.core.config import settings
 from app.core.enums import Plan
+from app.core.limiter import limiter, log_security_event
+from app.core.rate_limit import RateLimitCheck
 from app.database import DB
 from app.models.user import User
 from app.security import CurrentUser
@@ -53,8 +56,12 @@ class BillingStatusResponse(BaseModel):
     response_model=CheckoutResponse,
     status_code=status.HTTP_201_CREATED,
     summary="Create a Stripe Checkout session for Pro plan ($9/mo)",
+    dependencies=[
+        # 5 checkout attempts / hour / IP — prevents session flooding
+        Depends(RateLimitCheck("billing:checkout", max_per_ip=5, window_seconds=3600)),
+    ],
 )
-async def create_checkout(current_user: CurrentUser, db: DB) -> CheckoutResponse:
+async def create_checkout(current_user: CurrentUser, db: DB, request: Request) -> CheckoutResponse:
     if not settings.STRIPE_SECRET_KEY:
         raise HTTPException(status_code=503, detail="Stripe is not configured")
 
@@ -90,6 +97,10 @@ async def create_checkout(current_user: CurrentUser, db: DB) -> CheckoutResponse
     "/portal",
     response_model=PortalResponse,
     summary="Return Stripe Customer Portal URL for subscription management",
+    dependencies=[
+        # 10 portal sessions / hour / IP
+        Depends(RateLimitCheck("billing:portal", max_per_ip=10, window_seconds=3600)),
+    ],
 )
 async def get_portal(current_user: CurrentUser) -> PortalResponse:
     if not settings.STRIPE_SECRET_KEY:

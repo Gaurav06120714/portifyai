@@ -17,13 +17,14 @@ All endpoints require:
 import logging
 import uuid
 
-from fastapi import APIRouter, HTTPException, Query, Request, UploadFile, status
+from fastapi import APIRouter, Depends, HTTPException, Query, Request, UploadFile, status
 from pydantic import BaseModel
 from sqlalchemy import func, select
 
 from app.core.config import settings
 from app.core.enums import ResumeStatus
 from app.core.limiter import limiter
+from app.core.rate_limit import RateLimitCheck
 from app.database import DB
 from app.models.resume import Resume
 from app.models.user import User
@@ -114,7 +115,7 @@ class CoverLetterResponse(BaseModel):
     status_code=status.HTTP_201_CREATED,
     summary="Build a resume from form data using Claude AI",
 )
-@limiter.limit("10/minute")
+@limiter.limit("10/hour")
 async def build_resume(
     request: Request,
     payload: BuildResumeRequest,
@@ -162,7 +163,7 @@ async def build_resume(
     status_code=status.HTTP_200_OK,
     summary="Get AI skill suggestions based on partial profile",
 )
-@limiter.limit("10/minute")
+@limiter.limit("10/hour")
 async def suggest_skills(
     request: Request,
     payload: SuggestSkillsRequest,
@@ -209,7 +210,7 @@ async def suggest_skills(
     status_code=status.HTTP_200_OK,
     summary="Generate a tailored cover letter using Claude AI",
 )
-@limiter.limit("10/minute")
+@limiter.limit("10/hour")
 async def generate_cover_letter(
     request: Request,
     payload: CoverLetterRequest,
@@ -295,6 +296,10 @@ def _to_response(resume: Resume, presigned_url: str | None = None) -> ResumeResp
         401: {"description": "Not authenticated"},
         413: {"description": "File exceeds the maximum allowed size"},
     },
+    dependencies=[
+        # 20 uploads / hour / IP — prevent storage abuse
+        Depends(RateLimitCheck("resume:upload", max_per_ip=20, window_seconds=3600)),
+    ],
 )
 async def upload_resume(
     file: UploadFile,
