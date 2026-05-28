@@ -54,7 +54,7 @@ class SecuritySettings(BaseSettings):
     # ── Rate limiting (tokens per window) ─────────────────────────────────────
     # These are enforced by slowapi decorators on individual endpoints.
     # Defined here for visibility — actual enforcement is in the routers.
-    RATE_LIMIT_AI_ENDPOINTS: str = "10/minute"    # resume/build, portfolio/generate
+    RATE_LIMIT_AI_ENDPOINTS: str = "10/hour"      # resume/build, portfolio/generate — expensive LLM calls
     RATE_LIMIT_DEFAULT: str = "200/minute"        # global default per IP
 
     # ── CORS ──────────────────────────────────────────────────────────────────

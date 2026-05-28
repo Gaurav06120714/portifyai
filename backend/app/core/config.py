@@ -19,7 +19,7 @@ class Settings(BaseSettings):
     APP_NAME: str = "VyroPortify"
     API_V1_PREFIX: str = "/api/v1"
     ENVIRONMENT: str = "development"  # development | staging | production
-    DEBUG: bool = True
+    DEBUG: bool = False  # NEVER default True — set DEBUG=True explicitly in dev .env only
 
     # ── Database ──────────────────────────────────────────────────────────
     DATABASE_URL: str = "postgresql+asyncpg://user:password@localhost:5432/vyroportify"
@@ -51,7 +51,9 @@ class Settings(BaseSettings):
     OPENROUTER_API_KEY: str = ""
 
     # ── Clerk (authentication) ────────────────────────────────────────────
-    CLERK_JWKS_URL: str = "https://thorough-terrier-90.clerk.accounts.dev/.well-known/jwks.json"
+    # Format: https://<your-clerk-subdomain>.clerk.accounts.dev/.well-known/jwks.json
+    # Do NOT hardcode this — your subdomain identifies your Clerk instance.
+    CLERK_JWKS_URL: str = ""
 
     # ── Storage — AWS S3 or Cloudflare R2 (same boto3 interface) ─────────
     # Provider selection: "s3" | "r2"
@@ -175,6 +177,19 @@ def validate_production_config() -> None:
             errors.append(msg)
         else:
             warnings.append(msg)
+
+    # 5. CLERK_JWKS_URL — required for JWT verification; empty means all requests
+    #    will fail auth. Also validates it's not a placeholder.
+    if not settings.CLERK_JWKS_URL:
+        msg = "CLERK_JWKS_URL is not set — authentication will be broken"
+        if settings.is_production:
+            errors.append(msg)
+        else:
+            warnings.append(msg)
+
+    # 6. DEBUG must be False in production — True leaks stack traces to clients.
+    if settings.DEBUG and settings.is_production:
+        errors.append("DEBUG=True is not allowed in production — set DEBUG=False")
 
     # Emit warnings for dev/staging
     for w in warnings:
