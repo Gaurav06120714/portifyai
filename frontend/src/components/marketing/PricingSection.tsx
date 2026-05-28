@@ -12,7 +12,7 @@ const PLANS = [
     name: "Free",
     monthlyPrice: 0,
     yearlyPrice: 0,
-    desc: "Perfect for getting started",
+    desc: "Good for getting started",
     cta: "Start for free",
     href: "/register",
     accent: "#5555aa",
@@ -31,7 +31,7 @@ const PLANS = [
     name: "Pro",
     monthlyPrice: 9,
     yearlyPrice: 7,
-    desc: "For serious job seekers",
+    desc: "Best if you're actively job hunting",
     cta: "Get Pro",
     href: "/register?plan=pro",
     accent: "var(--pf-accent)",
@@ -82,10 +82,10 @@ export default function PricingSection() {
             Pricing
           </div>
           <h2 className="text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl">
-            Simple, transparent pricing
+            Pricing
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-muted-foreground">
-            Start free. Upgrade when you need to. No hidden fees, ever.
+            Start free. Upgrade if you need a custom domain or analytics. No hidden fees.
           </p>
 
           {/* Toggle */}

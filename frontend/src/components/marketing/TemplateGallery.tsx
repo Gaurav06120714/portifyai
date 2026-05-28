@@ -12,7 +12,7 @@ const TEMPLATES = [
     name: "Aurora",
     tag: "Most popular",
     tagColor: "var(--pf-accent)",
-    desc: "Dark electric with animated gradients. Commands attention from recruiters on the first scroll.",
+    desc: "Dark theme with a bold layout. Works well if you want your portfolio to stand out rather than blend in.",
     bg: "#0F0F1A",
     accent: "var(--pf-accent)",
     secondary: "#00d4ff",
@@ -24,7 +24,7 @@ const TEMPLATES = [
     name: "Minimal",
     tag: "Clean & classic",
     tagColor: "#00c896",
-    desc: "White space and sharp typography. The professional standard that never goes out of style.",
+    desc: "Clean, light, and easy to read. Works for pretty much any role or industry.",
     bg: "#FAFAFA",
     accent: "#1a1a1a",
     secondary: "#4f46e5",
@@ -36,7 +36,7 @@ const TEMPLATES = [
     name: "Cyber",
     tag: "Stand out",
     tagColor: "#00FF88",
-    desc: "Neon glassmorphism and terminal aesthetics. For those who refuse to blend into the crowd.",
+    desc: "High contrast with a terminal feel. Good for engineers, security folks, or anyone who wants something a bit different.",
     bg: "#0A0A0F",
     accent: "#00FF88",
     secondary: "#FF00AA",
@@ -185,11 +185,10 @@ export default function TemplateGallery() {
             Templates
           </div>
           <h2 className="text-4xl font-extrabold tracking-tight text-white sm:text-5xl">
-            Three premium themes
+            Three themes
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-[var(--pf-muted)]">
-            Every template is fully responsive, SEO-optimised, and crafted down to the
-            last pixel. Pick one — or switch anytime.
+            All three are fully responsive, SEO-ready, and mobile-friendly. Switch between them any time without re-entering your information.
           </p>
         </FadeUp>
 

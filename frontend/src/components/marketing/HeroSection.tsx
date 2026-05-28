@@ -7,23 +7,6 @@ import { ArrowRight, Play, Sparkles } from "lucide-react";
 export default function HeroSection() {
   return (
     <section className="relative flex min-h-dvh flex-col items-center justify-center overflow-hidden px-6 pt-20">
-      {/* Grid background */}
-      <div className="absolute inset-0 bg-grid mask-radial-fade opacity-60" />
-
-      {/* Radial glow */}
-      <div className="pointer-events-none absolute inset-0">
-        <motion.div
-          className="absolute left-1/2 top-1/2 h-[700px] w-[700px] -translate-x-1/2 -translate-y-1/2 rounded-full"
-          style={{
-            background:
-              "radial-gradient(circle, rgba(108,99,255,0.18) 0%, rgba(108,99,255,0.04) 50%, transparent 70%)",
-          }}
-          animate={{ scale: [1, 1.08, 1] }}
-          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-        />
-        <div className="absolute right-1/4 top-1/4 h-64 w-64 rounded-full bg-[#00d4ff] opacity-5 blur-3xl" />
-        <div className="absolute bottom-1/4 left-1/4 h-64 w-64 rounded-full bg-[#ff6b9d] opacity-5 blur-3xl" />
-      </div>
 
       <div className="relative mx-auto max-w-5xl text-center">
         {/* Badge */}
@@ -34,7 +17,7 @@ export default function HeroSection() {
           className="mb-6 inline-flex items-center gap-2 rounded-full border border-[rgba(108,99,255,0.35)] bg-[var(--pf-border-dim)] px-4 py-1.5 text-sm font-medium text-[#a09bff]"
         >
           <Sparkles className="h-3.5 w-3.5" />
-          Powered by Claude AI · Built for 2025
+          Built with Claude AI · Free to start
         </motion.div>
 
         {/* Headline */}
@@ -44,19 +27,11 @@ export default function HeroSection() {
           transition={{ duration: 0.6, delay: 0.1 }}
           className="text-5xl font-extrabold leading-[1.08] tracking-tight text-foreground sm:text-6xl lg:text-7xl"
         >
-          Turn your{" "}
-          <span className="animate-shimmer inline-block">Resume</span>
+          Turn your resume into{" "}
           <br />
-          into a portfolio{" "}
           <span className="relative inline-block">
-            that gets you hired
-            <motion.span
-              className="absolute -bottom-1 left-0 h-[3px] w-full rounded-full bg-gradient-to-r from-primary to-accent"
-              initial={{ scaleX: 0 }}
-              animate={{ scaleX: 1 }}
-              transition={{ duration: 0.7, delay: 0.9, ease: "easeOut" }}
-              style={{ transformOrigin: "left" }}
-            />
+            a portfolio that gets you hired
+            <span className="absolute -bottom-1 left-0 h-[3px] w-full rounded-full bg-primary" />
           </span>
         </motion.h1>
 
@@ -67,9 +42,7 @@ export default function HeroSection() {
           transition={{ duration: 0.55, delay: 0.25 }}
           className="mx-auto mt-7 max-w-2xl text-lg leading-relaxed text-muted-foreground sm:text-xl"
         >
-          Upload a PDF or answer 12 quick questions. Claude AI parses your experience,
-          writes compelling copy, and renders a pixel-perfect portfolio — live in under
-          60 seconds.
+          Upload your resume or answer 12 quick questions. Claude reads your experience, writes the copy, and builds your portfolio. The whole thing takes about 60 seconds.
         </motion.p>
 
         {/* CTAs */}
@@ -81,21 +54,15 @@ export default function HeroSection() {
         >
           <Link
             href="/register"
-            className="group relative flex items-center gap-2 overflow-hidden rounded-2xl bg-primary px-7 py-3.5 text-base font-semibold text-primary-foreground shadow-lg shadow-primary/20 transition-all hover:shadow-xl hover:shadow-primary/30"
+            className="group flex items-center gap-2 rounded-2xl bg-primary px-7 py-3.5 text-base font-semibold text-primary-foreground transition-all hover:bg-primary/90"
           >
-            <span className="relative z-10">Generate your portfolio free</span>
-            <ArrowRight className="relative z-10 h-4 w-4 transition-transform group-hover:translate-x-1" />
-            <motion.span
-              className="absolute inset-0 bg-gradient-to-r from-primary via-primary/80 to-primary"
-              style={{ backgroundSize: "200% 100%" }}
-              animate={{ backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }}
-              transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-            />
+            Generate your portfolio free
+            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
           </Link>
 
           <Link
             href="#how-it-works"
-            className="flex items-center gap-2 rounded-2xl border border-border bg-background/50 px-7 py-3.5 text-base font-semibold text-foreground/90 backdrop-blur-sm transition-all hover:border-primary/50 hover:bg-muted/50"
+            className="flex items-center gap-2 rounded-2xl border border-border bg-background px-7 py-3.5 text-base font-semibold text-foreground/90 transition-all hover:border-primary/50 hover:bg-muted"
           >
             <Play className="h-4 w-4 fill-current" />
             See how it works
@@ -134,14 +101,11 @@ export default function HeroSection() {
 
             {/* Fake portfolio preview */}
             <div className="relative h-72 w-full overflow-hidden bg-background sm:h-96">
-              {/* Left glow */}
-              <div className="absolute left-0 top-0 h-48 w-48 rounded-full bg-primary opacity-10 blur-3xl" />
-              <div className="absolute bottom-0 right-0 h-48 w-48 rounded-full bg-accent opacity-10 blur-3xl" />
 
               {/* Fake portfolio content */}
               <div className="relative flex h-full flex-col items-center justify-center gap-5 p-8">
                 <div className="flex flex-col items-center gap-3">
-                  <div className="h-14 w-14 rounded-full bg-gradient-to-br from-primary to-accent" />
+                  <div className="h-14 w-14 rounded-full bg-primary" />
                   <div className="h-7 w-48 rounded-lg bg-primary/20" />
                   <div className="h-4 w-32 rounded-md bg-primary/10" />
                 </div>
@@ -184,8 +148,6 @@ export default function HeroSection() {
             </div>
           </div>
 
-          {/* Glow below */}
-          <div className="absolute -bottom-8 left-1/2 h-16 w-2/3 -translate-x-1/2 rounded-full bg-primary opacity-20 blur-3xl" />
         </motion.div>
       </div>
     </section>

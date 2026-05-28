@@ -44,7 +44,7 @@ export default function LogoBar() {
   return (
     <section className="border-y border-border bg-muted/10 py-12">
       <FadeUp className="mb-7 text-center text-sm font-bold uppercase tracking-widest text-muted-foreground/50">
-        Loved by developers at
+        Used by people at
       </FadeUp>
 
       <div className="relative overflow-hidden">

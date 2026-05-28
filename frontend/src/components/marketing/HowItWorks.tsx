@@ -18,7 +18,7 @@ const STEPS = [
     n: "02",
     icon: Sparkles,
     title: "Claude AI writes your copy",
-    body: "Our Claude AI parses your experience, writes a compelling headline, polishes your bullet points, and suggests skills you might have missed.",
+    body: "Claude reads what you've worked on and writes a headline, bio, and bullet points. It also surfaces skills you might have forgotten to mention.",
     color: "#00d4ff",
     glow: "rgba(0,212,255,0.35)",
   },
@@ -93,10 +93,10 @@ export default function HowItWorks() {
             How it works
           </div>
           <h2 className="text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl">
-            Portfolio in three steps
+            How it works
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-muted-foreground">
-            No design tool. No HTML. No waiting. Just your experience, transformed.
+            No design tool. No code. Just fill in your experience and we handle the rest.
           </p>
         </FadeUp>
 

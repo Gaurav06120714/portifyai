@@ -6,56 +6,56 @@ import FadeUp from "./FadeUp";
 const FEATURES = [
   {
     icon: Brain,
-    title: "Claude AI-powered copy",
-    desc: "Anthropic's Claude reads your experience and writes headlines, summaries, and bullet points that actually sound like you.",
+    title: "AI writes your copy",
+    desc: "Claude reads what you've done and writes your headline, bio, and bullet points. You can edit anything after.",
     color: "var(--pf-accent)",
   },
   {
     icon: Zap,
-    title: "60-second generation",
-    desc: "From upload to live URL in under a minute. No waiting, no queues — just instant portfolio.",
+    title: "Ready in 60 seconds",
+    desc: "Upload your resume and you'll have a live URL in under a minute. No queue, no wait.",
     color: "#00d4ff",
   },
   {
     icon: Globe,
     title: "Custom domain",
-    desc: "Connect your own domain or use your free vyroportify.com/[slug] URL. SSL included automatically.",
+    desc: "Use your free vyroportify.com/[slug] link, or point your own domain. SSL is set up automatically.",
     color: "#ff6b9d",
   },
   {
     icon: Palette,
-    title: "3 premium templates",
-    desc: "Aurora, Minimal, Cyber — each crafted down to the last pixel. Switch templates without re-entering data.",
+    title: "3 templates",
+    desc: "Aurora, Minimal, and Cyber. Switch between them any time without re-entering anything.",
     color: "#00FF88",
   },
   {
     icon: Search,
-    title: "SEO optimised",
-    desc: "Server-side rendered with structured data, Open Graph tags, and fast Core Web Vitals out of the box.",
+    title: "Shows up on Google",
+    desc: "Portfolios are server-rendered with proper meta tags and structured data. Good Core Web Vitals out of the box.",
     color: "#ffd166",
   },
   {
     icon: RefreshCw,
-    title: "Always up to date",
-    desc: "Update your resume anytime and regenerate. Your URL stays the same — share it once, forever.",
+    title: "Easy to update",
+    desc: "Got a new job or project? Update your resume and regenerate. Your link stays the same.",
     color: "var(--pf-accent)",
   },
   {
     icon: Download,
     title: "PDF export",
-    desc: "Export a print-ready PDF of your portfolio with one click. Recruiters love both formats.",
+    desc: "Download a print-ready version with one click. Useful when a recruiter asks for a PDF.",
     color: "#00d4ff",
   },
   {
     icon: Shield,
     title: "Privacy controls",
-    desc: "Keep your portfolio private until you're ready. Publish, unpublish, or password-protect at any time.",
+    desc: "Your portfolio is private by default. Publish when you're ready, or password-protect it if you prefer.",
     color: "#ff6b9d",
   },
   {
     icon: Share2,
-    title: "Analytics dashboard",
-    desc: "See who's viewing your portfolio, where they're coming from, and which projects get the most clicks.",
+    title: "View analytics",
+    desc: "See how many people viewed your portfolio, where they came from, and what they clicked.",
     color: "#00FF88",
   },
 ];
@@ -71,10 +71,10 @@ export default function Features() {
             Features
           </div>
           <h2 className="text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl">
-            Everything you need to get hired
+            What you get
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-muted-foreground">
-            No duct tape. Every feature is built in — not bolted on.
+            Everything is included. Nothing is an afterthought.
           </p>
         </FadeUp>
 
