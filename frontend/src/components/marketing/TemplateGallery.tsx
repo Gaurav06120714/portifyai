@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, Eye } from "lucide-react";
 import FadeUp from "./FadeUp";
 
@@ -50,14 +49,10 @@ function TemplateCard({ tpl, index }: { tpl: (typeof TEMPLATES)[0]; index: numbe
   const isDark = tpl.id !== "minimal";
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 28 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-60px" }}
-      transition={{ duration: 0.55, delay: index * 0.12, ease: [0.21, 0.47, 0.32, 0.98] }}
+    <div
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      className="group relative overflow-hidden rounded-2xl border border-[var(--pf-accent-soft)] bg-[var(--pf-surface)] transition-all duration-300 hover:border-[var(--pf-border-hover)] hover:shadow-[0_20px_60px_rgba(0,0,0,0.5)]"
+      className="group relative overflow-hidden rounded-2xl border border-[var(--pf-accent-soft)] bg-[var(--pf-surface)] transition-all duration-300 hover:border-[var(--pf-border-hover)]"
     >
       {/* Preview area */}
       <div
@@ -134,28 +129,20 @@ function TemplateCard({ tpl, index }: { tpl: (typeof TEMPLATES)[0]; index: numbe
         </div>
 
         {/* Hover overlay */}
-        <AnimatePresence>
-          {hovered && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
-              className="absolute inset-0 flex items-center justify-center gap-3 bg-black/50 backdrop-blur-sm"
+        {hovered && (
+          <div className="absolute inset-0 flex items-center justify-center gap-3 bg-black/50">
+            <Link
+              href={`/register?template=${tpl.id}`}
+              className="flex items-center gap-1.5 rounded-xl px-4 py-2 text-sm font-semibold text-white"
+              style={{ background: tpl.accent }}
             >
-              <Link
-                href={`/register?template=${tpl.id}`}
-                className="flex items-center gap-1.5 rounded-xl px-4 py-2 text-sm font-semibold text-white"
-                style={{ background: tpl.accent }}
-              >
-                Use template <ArrowRight className="h-3.5 w-3.5" />
-              </Link>
-              <button className="flex h-9 w-9 items-center justify-center rounded-xl border border-white/20 bg-white/10 text-white">
-                <Eye className="h-4 w-4" />
-              </button>
-            </motion.div>
-          )}
-        </AnimatePresence>
+              Use template <ArrowRight className="h-3.5 w-3.5" />
+            </Link>
+            <button className="flex h-9 w-9 items-center justify-center rounded-xl border border-white/20 bg-white/10 text-white">
+              <Eye className="h-4 w-4" />
+            </button>
+          </div>
+        )}
       </div>
 
       {/* Info */}
@@ -171,7 +158,7 @@ function TemplateCard({ tpl, index }: { tpl: (typeof TEMPLATES)[0]; index: numbe
         </div>
         <p className="mt-2 text-sm leading-relaxed text-[var(--pf-muted)]">{tpl.desc}</p>
       </div>
-    </motion.div>
+    </div>
   );
 }
 

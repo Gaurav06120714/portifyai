@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
 import { Check, Zap } from "lucide-react";
 import FadeUp from "./FadeUp";
 
@@ -138,17 +137,11 @@ export default function PricingSection() {
                   <h3 className="text-lg font-bold text-foreground">{plan.name}</h3>
                   <p className="mt-1 text-sm text-muted-foreground">{plan.desc}</p>
                   <div className="mt-5 flex items-end gap-1">
-                    <motion.span
-                      key={`${plan.id}-${yearly}`}
-                      initial={{ opacity: 0, y: 8 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.25 }}
-                      className="text-4xl font-extrabold text-foreground"
-                    >
+                    <span className="text-4xl font-extrabold text-foreground">
                       {plan.id === "lifetime"
                         ? `$${plan.monthlyPrice}`
                         : `$${yearly ? plan.yearlyPrice : plan.monthlyPrice}`}
-                    </motion.span>
+                    </span>
                     {plan.id !== "lifetime" && plan.monthlyPrice > 0 && (
                       <span className="mb-1 text-sm text-muted-foreground">/mo</span>
                     )}
